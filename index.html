@@ -3,509 +3,338 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Amna Jadoon — WordPress developer, speed and migrations</title>
-<meta name="description" content="WordPress developer in Abbottabad, Pakistan. 3+ years, 60+ WordPress, Shopify and Wix sites built, fixed and migrated. PageSpeed from the 40s-50s to 70-80+."/>
+<title>Amna Jadoon, WordPress speed and migration developer</title>
+<meta name="description" content="Slow WordPress site? Send Amna Jadoon the URL and get your PageSpeed and GTmetrix numbers, the three things costing you the most, and a fixed price to fix them."/>
+<link rel="canonical" href="https://amnajadoon-dev.github.io/"/>
+<link rel="icon" href="favicon.svg" type="image/svg+xml"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://amnajadoon-dev.github.io/"/>
+<meta property="og:title" content="Amna Jadoon, WordPress speed and migration developer"/>
+<meta property="og:description" content="Send me your URL. You get your PageSpeed and GTmetrix numbers, the three things costing you the most, and a fixed price to fix them."/>
+<meta property="og:image" content="https://amnajadoon-dev.github.io/og-image.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --ink:#0C1016;
-  --ink-2:#141A23;
-  --bone:#ECE7E1;
-  --bone-dim:rgba(236,231,225,.56);
-  --bone-faint:rgba(236,231,225,.30);
-  --rule:rgba(236,231,225,.14);
-  --orange:#FF894A;
-  --sans:'Archivo',system-ui,sans-serif;
-  --mono:'IBM Plex Mono',ui-monospace,monospace;
-  --rail:300px;
+  --paper:#F4F1EA;
+  --ink:#171512;
+  --ink-dim:rgba(23,21,18,.74);
+  --rule:rgba(23,21,18,.18);
+  --pass:#0CCE6B;
+  --serif:'Source Serif 4',Georgia,serif;
+  --sans:system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
   --pad:clamp(20px,5vw,64px);
+  color-scheme:light;
 }
-*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+*{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--ink);color:var(--bone);font-family:var(--sans);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-::selection{background:var(--orange);color:var(--ink)}
-a{color:inherit;text-decoration:none}
-h1,h2,h3{font-weight:800;font-stretch:125%;line-height:.94;letter-spacing:-.02em;text-transform:uppercase}
-h1{font-size:clamp(38px,6.4vw,78px)}
-h2{font-size:clamp(30px,4.2vw,52px)}
-h3{font-size:clamp(19px,2vw,24px);line-height:1.08}
-.mono{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase}
-.orange{color:var(--orange)}
-.dim{color:var(--bone-dim)}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+::selection{background:var(--pass);color:var(--ink)}
+a{color:inherit;text-underline-offset:3px}
+:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+h1,h2,h3{font-family:var(--serif);font-weight:700;line-height:1.08;letter-spacing:-.015em}
+h1{font-size:clamp(40px,7vw,84px);max-width:13ch}
+h2{font-size:clamp(28px,3vw,38px)}
+h3{font-size:clamp(21px,2vw,25px);font-weight:600}
+.dim{color:var(--ink-dim)}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 
-/* ---------- LEFT RAIL (breaks the centered-hero template) ---------- */
-.rail{position:fixed;top:0;left:0;width:var(--rail);height:100vh;padding:var(--pad);display:none;flex-direction:column;justify-content:space-between;border-right:1px solid var(--rule);z-index:50}
-@media(min-width:1080px){.rail{display:flex}.shell{margin-left:var(--rail)}}
-.rail-name{font-family:var(--mono);font-size:13px;letter-spacing:.2em;text-transform:uppercase;line-height:1.7}
-.rail-name b{display:block;font-family:var(--sans);font-size:26px;font-stretch:125%;font-weight:800;letter-spacing:-.01em;line-height:1}
-.rail-nav{display:flex;flex-direction:column;gap:2px}
-.rail-nav a{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--bone-dim);padding:7px 0;border-bottom:1px solid transparent;transition:color .18s,border-color .18s;display:flex;gap:14px}
-.rail-nav a span{color:var(--bone-faint);width:18px}
-.rail-nav a:hover,.rail-nav a.on{color:var(--orange);border-color:var(--rule)}
-.status{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--bone-dim);line-height:1.9}
-.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--orange);margin-right:7px;vertical-align:1px}
-
-/* ---------- MOBILE BAR ---------- */
-.topbar{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:14px var(--pad);background:rgba(12,16,22,.94);border-bottom:1px solid var(--rule)}
-@media(min-width:1080px){.topbar{display:none}}
-.topbar b{font-stretch:125%;font-size:18px;letter-spacing:-.01em}
-#burger{background:none;border:1px solid var(--rule);color:var(--bone);font-family:var(--mono);font-size:11px;letter-spacing:.16em;padding:8px 12px;cursor:pointer}
-#m-nav{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;padding:8px var(--pad) 20px;background:var(--ink);border-bottom:1px solid var(--rule);max-height:calc(100vh - 64px);overflow-y:auto}
-#m-nav.open{display:flex}
-#m-nav a{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;padding:15px 0;border-bottom:1px solid var(--rule);color:var(--bone-dim)}
-
-/* ---------- SECTION FRAME ---------- */
-section{padding:clamp(56px,9vw,120px) var(--pad);border-bottom:1px solid var(--rule);position:relative}
-.eyebrow{display:flex;align-items:baseline;gap:14px;margin-bottom:26px}
-.eyebrow i{font-style:normal;font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--orange)}
-.eyebrow hr{flex:1;border:0;border-top:1px solid var(--rule)}
-.lead{max-width:62ch;font-size:clamp(16px,1.5vw,19px);color:var(--bone-dim);margin-top:22px}
-.btn{display:inline-block;background:var(--orange);color:var(--ink);font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;padding:16px 26px;border:1px solid var(--orange);transition:background .18s,color .18s}
-.btn:hover{background:transparent;color:var(--orange)}
-.btn-line{display:inline-block;font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;padding:16px 0;border-bottom:1px solid var(--orange);color:var(--bone)}
-.btn-line:hover{color:var(--orange)}
-
-/* ---------- HERO ---------- */
-.hero{padding-top:clamp(48px,7vw,86px);padding-bottom:clamp(48px,7vw,86px)}
-.hero h1{max-width:17ch}
-.hero h1 em{font-style:normal;color:var(--orange)}
-.hero-sub{margin-top:28px;max-width:56ch;font-size:clamp(16px,1.6vw,20px);color:var(--bone-dim)}
-.hero-sub b{color:var(--bone);font-weight:600}
-.hero-cta{display:flex;flex-wrap:wrap;gap:26px;align-items:center;margin-top:38px}
-.hero-meta{margin-top:46px;display:grid;grid-template-columns:1fr;border-top:1px solid var(--rule)}
-.hero-meta div{padding:20px 0;border-bottom:1px solid var(--rule)}
-@media(min-width:680px){
-  .hero-meta{grid-template-columns:1fr 1fr 1.8fr}
-  .hero-meta div{padding:20px;border-bottom:0;border-right:1px solid var(--rule)}
-  .hero-meta div:first-child{padding-left:0}
-  .hero-meta div:last-child{border-right:0;padding-right:0}
-}
-.hero-meta strong{display:block;font-size:clamp(26px,3vw,38px);font-stretch:125%;font-weight:800;line-height:1;letter-spacing:-.02em}
-.hero-meta strong.score{font-size:clamp(20px,6.6vw,36px);white-space:nowrap}
-@media(min-width:680px){.hero-meta strong.score{font-size:clamp(20px,2.8vw,36px)}}
-.hero-meta strong b{color:var(--orange);font-weight:inherit}
-.hero-meta span{display:block;margin-top:9px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--bone-dim);line-height:1.7}
-.footnote{margin-top:16px;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--bone-faint);text-transform:uppercase}
-
-/* ---------- SERVICE ROWS (not three icon cards) ---------- */
-.row{display:grid;grid-template-columns:62px 1fr;gap:0 24px;padding:34px 0;border-top:1px solid var(--rule);align-items:start}
-@media(min-width:900px){.row{grid-template-columns:62px minmax(0,1fr) minmax(0,1.05fr);gap:0 48px}}
-.row>*{min-width:0}
-@media(max-width:899px){.row ul{grid-column:1/-1}}
-@media(max-width:599px){.row{grid-template-columns:30px minmax(0,1fr);gap:0 12px}}
-.row:last-of-type{border-bottom:1px solid var(--rule)}
-.row-n{font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--orange);padding-top:6px}
-.row p{color:var(--bone-dim);margin-top:12px;max-width:46ch;font-size:15.5px}
-.row ul{list-style:none;margin-top:18px}
-@media(min-width:900px){.row ul{margin-top:6px}}
-.row li{font-size:14.5px;color:var(--bone-dim);padding:7px 0 7px 20px;position:relative}
-.row li::before{content:"";position:absolute;left:0;top:16px;width:9px;height:1px;background:var(--orange)}
-.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
-.tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--rule);padding:5px 10px;color:var(--bone-dim)}
-
-/* ---------- WORK LEDGER ---------- */
-.filters{display:flex;flex-wrap:wrap;gap:8px;margin:28px 0 8px}
-.filters button{background:none;border:1px solid var(--rule);color:var(--bone-dim);font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;padding:9px 14px;cursor:pointer;transition:.18s}
-.filters button.on{background:var(--orange);border-color:var(--orange);color:var(--ink)}
-.ledger{width:100%;border-collapse:collapse;margin-top:14px}
-.ledger th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--bone-faint);font-weight:500;padding:12px 14px 12px 0;border-bottom:1px solid var(--rule)}
-.ledger td{padding:18px 14px 18px 0;border-bottom:1px solid var(--rule);vertical-align:top;font-size:15px}
-.ledger tr{transition:background .16s}
-.ledger tr:hover td{background:rgba(255,137,74,.05)}
-.ledger .n{font-family:var(--mono);font-size:11px;color:var(--bone-faint);width:40px}
-.ledger .name{font-stretch:110%;font-weight:700;font-size:17px;letter-spacing:-.01em;white-space:nowrap}
-.ledger tr:hover .name{color:var(--orange)}
-.ledger .meta{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--bone-dim)}
-.ledger .go{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--bone-dim);white-space:nowrap}
-.ledger tr:hover .go{color:var(--orange)}
-.ledger .sub{display:block;margin-top:6px;line-height:1.6}
-.hide-col{display:none}
-@media(min-width:760px){.hide-col{display:table-cell}.ledger .sub{display:none}}
+/* top bar */
+.bar{position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:12px var(--pad);background:var(--paper);border-bottom:1px solid var(--rule)}
+.bar-name{font-family:var(--serif);font-weight:700;font-size:20px;text-decoration:none;padding:8px 0}
+.bar nav{display:flex;gap:26px}
+.bar nav a{font-size:15px;text-decoration:none;padding:8px 0}
+.bar nav a:hover{text-decoration:underline}
+#burger{display:none;background:none;border:1px solid var(--ink);color:var(--ink);font:inherit;font-size:15px;padding:9px 14px;cursor:pointer}
 @media(max-width:759px){
-  .ledger .name{white-space:normal;display:block;padding:6px 0}
-  .ledger .n{width:30px}
-  .ledger .go{display:inline-block;padding:12px 0}
+  #burger{display:block}
+  .bar nav{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;padding:4px var(--pad) 16px;background:var(--paper);border-bottom:1px solid var(--rule)}
+  .bar nav.open{display:flex}
+  .bar nav a{padding:14px 0;border-bottom:1px solid var(--rule);font-size:16px}
 }
 
-/* ---------- SPLIT / NOTE ---------- */
-.split{display:grid;gap:36px}
-.split>*{min-width:0}
-@media(min-width:900px){.split{grid-template-columns:1fr 1fr;gap:64px}}
-.note{border-left:2px solid var(--orange);padding:4px 0 4px 24px}
-.note p{color:var(--bone-dim);margin-top:14px;font-size:15.5px;max-width:50ch}
-.stack-group{padding:22px 0;border-top:1px solid var(--rule)}
-.stack-group h4{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--orange);font-weight:500;margin-bottom:12px}
-.stack-group p{font-size:15.5px;color:var(--bone-dim)}
+/* sections: heading in a side column on wide screens */
+section{padding:clamp(52px,8vw,104px) var(--pad);border-bottom:1px solid var(--rule);scroll-margin-top:60px}
+.sec{display:grid;gap:26px}
+.sec>*{min-width:0}
+@media(min-width:900px){.sec{grid-template-columns:220px minmax(0,1fr);gap:56px}}
+.body{max-width:760px}
+.lead{font-size:clamp(17px,1.5vw,19px);margin-bottom:34px}
 
-/* ---------- TIMELINE ---------- */
-.job{display:grid;grid-template-columns:1fr;gap:6px;padding:26px 0;border-top:1px solid var(--rule)}
-@media(min-width:820px){.job{grid-template-columns:190px 1fr;gap:0 48px}}
-.job .when{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--bone-faint);padding-top:5px}
-.job h3{font-size:20px}
-.job .where{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);margin-top:7px}
-.job p{color:var(--bone-dim);margin-top:12px;font-size:15.5px;max-width:58ch}
+/* hero */
+.hero p.offer{margin-top:24px;max-width:50ch;font-size:clamp(18px,1.7vw,21px)}
+.url-form{margin-top:32px;max-width:620px}
+.url-form label{margin-top:0}
+.url-row{display:flex;gap:10px}
+.url-row .field{flex:1;min-width:0}
+.hero .fact{margin-top:30px;max-width:56ch;font-size:15.5px}
+@media(max-width:519px){.url-row{flex-direction:column}}
 
-/* ---------- CONTACT ---------- */
-.field{display:block;width:100%;background:transparent;border:0;border-bottom:1px solid var(--rule);color:var(--bone);font-family:var(--sans);font-size:16px;padding:14px 0;outline:none;transition:border-color .18s}
-.field:focus{border-color:var(--orange)}
-.field::placeholder{color:var(--bone-faint)}
-select.field{color:var(--bone-dim)}
-select.field option{background:var(--ink-2)}
-label{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--bone-faint);margin-top:26px}
-.grid-2{display:grid;gap:0 32px}
-@media(min-width:680px){.grid-2{grid-template-columns:1fr 1fr}}
-.contact-line{display:flex;justify-content:space-between;gap:20px;padding:16px 0;border-bottom:1px solid var(--rule);font-size:15.5px}
-.contact-line span:first-child{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--bone-faint);padding-top:4px;flex-shrink:0}
-.contact-line>:last-child{min-width:0;overflow-wrap:anywhere;text-align:right}
-.ph{color:var(--orange);font-family:var(--mono);font-size:12px}
+/* buttons and fields */
+.btn{background:var(--ink);color:var(--paper);border:1px solid var(--ink);font:inherit;font-weight:600;padding:13px 24px;min-height:50px;cursor:pointer}
+.btn:hover{background:transparent;color:var(--ink)}
+label{display:block;font-size:15px;font-weight:600;margin:20px 0 6px}
+.field{display:block;width:100%;background:#FFFDF8;border:1px solid var(--ink);border-radius:0;color:var(--ink);font:inherit;font-size:16px;padding:12px;min-height:50px}
+.field::placeholder{color:var(--ink-dim)}
+.hp{position:absolute;left:-9999px}
 
-footer{padding:34px var(--pad);display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--bone-faint)}
-.reveal{opacity:0;transform:translateY(14px)}
-.reveal.in{opacity:1;transform:none;transition:opacity .6s ease,transform .6s cubic-bezier(.2,.8,.2,1)}
-@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
+/* work */
+.case{border-left:4px solid var(--pass);padding:2px 0 2px 20px;margin-bottom:38px}
+.case p{margin-top:10px;color:var(--ink-dim);max-width:62ch}
+.case a.visit{display:inline-block;margin-top:8px;padding:6px 0;font-size:15px}
+h3.others{margin:44px 0 6px}
+.sites{list-style:none;border-top:1px solid var(--rule);margin-top:14px}
+.sites li{display:flex;flex-wrap:wrap;justify-content:space-between;gap:2px 20px;padding:13px 0;border-bottom:1px solid var(--rule)}
+.sites a{font-weight:600;display:inline-block;padding:5px 0}
+.sites span{font-size:15px;color:var(--ink-dim)}
 
-/* ---------- PHONE AND TABLET ---------- */
-@media(max-width:1079px){section{scroll-margin-top:64px}}
-@media(max-width:359px){h1{font-size:11vw}}
-@media(max-width:759px){
-  #burger{padding:12px 14px}
-  .filters button{padding:13px 14px;font-size:11px}
-  .hero-meta span,.footnote{font-size:11.5px}
-  .footnote{color:var(--bone-dim)}
-  .hero-cta{gap:14px 26px}
-  footer a{display:inline-block;padding:12px 0}
-  .contact-line{padding:8px 0;align-items:center}
-  .contact-line a{display:inline-block;padding:12px 0}
-  .contact-line span{padding:8px 0}
-  .contact-line span:first-child{padding-top:8px}
-}
+/* services */
+.svc{padding:28px 0;border-top:1px solid var(--rule)}
+.svc:first-child{border-top:0;padding-top:0}
+.svc>p{margin-top:10px;color:var(--ink-dim);max-width:62ch}
+.svc ul{margin:12px 0 0 20px;color:var(--ink-dim);font-size:16px}
+.svc li{padding:3px 0}
+.tools{font-size:15px}
+
+/* stack */
+.stack{padding:18px 0;border-top:1px solid var(--rule)}
+.stack:first-child{border-top:0;padding-top:0}
+.stack h3{font-family:var(--sans);font-size:16px;font-weight:700;letter-spacing:0}
+.stack p{margin-top:6px;color:var(--ink-dim)}
+.limit{border-left:4px solid var(--ink);padding-left:20px;margin-top:14px}
+.limit p{color:var(--ink)}
+
+/* experience */
+.job{display:grid;gap:4px;padding:22px 0;border-top:1px solid var(--rule)}
+.job:first-child{border-top:0;padding-top:0}
+.job>*{min-width:0}
+@media(min-width:680px){.job{grid-template-columns:150px minmax(0,1fr);gap:0 24px}}
+.when{font-size:15px;color:var(--ink-dim);padding-top:3px}
+.where{font-size:15px;font-weight:600;margin-top:5px}
+.job p{margin-top:8px;color:var(--ink-dim);max-width:60ch}
+.creds{margin-top:30px;padding-top:22px;border-top:1px solid var(--rule)}
+.creds p{margin-top:6px;color:var(--ink-dim)}
+
+/* contact */
+.contact-lines{margin:26px 0 8px}
+.contact-lines p{padding:6px 0;overflow-wrap:anywhere}
+.contact-lines a{display:inline-block;padding:4px 0}
+#contact .btn{margin-top:26px}
+footer{padding:28px var(--pad);display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between;font-size:15px;color:var(--ink-dim)}
+footer a{display:inline-block;padding:4px 0}
 </style>
 </head>
 <body>
 
-<!-- LEFT RAIL -->
-<aside class="rail">
-  <div class="rail-name">
-    <b>Amna Jadoon</b>
-    WordPress developer<br>Abbottabad, PK
-  </div>
-  <nav class="rail-nav" id="railNav">
-    <a href="#work"><span>01</span>Work</a>
-    <a href="#services"><span>02</span>Services</a>
-    <a href="#stack"><span>03</span>Stack</a>
-    <a href="#experience"><span>04</span>Experience</a>
-    <a href="#contact"><span>05</span>Contact</a>
+<header class="bar">
+  <a class="bar-name" href="#top">Amna Jadoon</a>
+  <button id="burger" aria-controls="site-nav" aria-expanded="false">Menu</button>
+  <nav id="site-nav">
+    <a href="#work">Work</a>
+    <a href="#services">Services</a>
+    <a href="#stack">Stack</a>
+    <a href="#experience">Experience</a>
+    <a href="#contact">Contact</a>
   </nav>
-  <div class="status">
-    <span class="dot"></span>Taking work for WordPress websites<br>
-    Remote, UTC+5<br>
-    English / Urdu
-  </div>
-</aside>
+</header>
 
-<!-- MOBILE BAR -->
-<div class="topbar">
-  <b>AMNA JADOON</b>
-  <button id="burger" aria-controls="m-nav" aria-expanded="false">Menu</button>
-  <nav id="m-nav">
-    <a href="#work">01 / Work</a>
-    <a href="#services">02 / Services</a>
-    <a href="#stack">03 / Stack</a>
-    <a href="#experience">04 / Experience</a>
-    <a href="#contact">05 / Contact</a>
-  </nav>
-</div>
+<main>
 
-<div class="shell">
-
-<!-- HERO -->
 <section class="hero" id="top">
-  <h1 class="reveal">I fix slow WordPress sites and move them between hosts <em>without losing data.</em></h1>
-  <p class="hero-sub reveal">Three years of it, mostly for a US agency. If your site takes eight seconds to load, your checkout breaks on mobile, or your host is holding your site hostage, that is the work I do.</p>
-  <div class="hero-cta reveal">
-    <a class="btn" href="#contact">Send me your URL</a>
-    <a class="btn-line" href="#work">See the 11 sites</a>
-  </div>
-  <div class="hero-meta reveal">
-    <div><strong>3+</strong><span>Years building<br>WordPress</span></div>
-    <div><strong>60+</strong><span>Sites built, fixed<br>or migrated</span></div>
-    <div><strong class="score">40s&nbsp;&rarr;&nbsp;<b>70-80+</b></strong><span>PageSpeed and GTmetrix<br>on optimization jobs</span></div>
-  </div>
-  <p class="footnote reveal">Most of this was delivered as an employee at Digital Clics Marketing and Meer Technologies. I went independent in August 2026.</p>
+  <h1>Slow WordPress site? Send me the URL.</h1>
+  <p class="offer dim">You get your PageSpeed and GTmetrix numbers, the three things costing you the most, and a fixed price to fix them.</p>
+  <form class="url-form" id="start" action="#contact">
+    <label for="hero-url">Your site</label>
+    <div class="url-row">
+      <input class="field" id="hero-url" inputmode="url" autocomplete="url" placeholder="yoursite.com">
+      <button class="btn" type="submit">Continue</button>
+    </div>
+  </form>
+  <p class="fact dim">I've worked on WordPress sites since 2022, including 15 months at Digital Clics, a US agency. That's 60+ sites built, fixed or migrated. Taking new WordPress work, remote from Abbottabad, Pakistan (UTC+5).</p>
 </section>
 
-<!-- WORK -->
 <section id="work">
-  <div class="eyebrow reveal"><i>01</i><hr><i>Selected work</i></div>
-  <h2 class="reveal">Eleven live sites.<br>Every one of them is still up.</h2>
-  <p class="lead reveal">Built and maintained as part of the team at Digital Clics Marketing. Click any name and judge the live site yourself, which is more useful than a screenshot I cropped nicely.</p>
+  <div class="sec">
+    <h2>Work</h2>
+    <div class="body">
+      <p class="lead dim">These were team projects at Digital Clics Marketing. Here's the part that was mine.</p>
 
-  <div class="filters reveal" id="filters">
-    <button class="on" data-f="all">All (11)</button>
-    <button data-f="woo">WooCommerce (2)</button>
-    <button data-f="wp">WordPress (7)</button>
-    <button data-f="other">Wix and Hostinger (2)</button>
+      <article class="case">
+        <h3>Marysol Flower Designs</h3>
+        <p>Set up the catalog and checkout for a florist: arrangement size and style options, delivery-date selection, and a mobile-first checkout.</p>
+        <a class="visit" href="https://marysolflowerdesigns.com" target="_blank" rel="noopener">Visit the site</a>
+      </article>
+
+      <article class="case">
+        <h3>Koba Construction</h3>
+        <p>Built a project showcase with image galleries and lead-capture forms for B2B buyers checking past work.</p>
+        <a class="visit" href="https://kobaconstructionllc.com" target="_blank" rel="noopener">Visit the site</a>
+      </article>
+
+      <h3 class="others">Other WordPress sites from the same team</h3>
+      <ul class="sites">
+        <li><a href="https://aviaperformance.com.au" target="_blank" rel="noopener">Avia Performance</a><span>Automotive retail, Australia, WooCommerce</span></li>
+        <li><a href="https://otrapizzeriaphx.com" target="_blank" rel="noopener">Otra Pizzeria PHX</a><span>Restaurant, online menu</span></li>
+        <li><a href="https://quikslips.com" target="_blank" rel="noopener">QuikSlips</a><span>POS platform</span></li>
+        <li><a href="https://cmgeneralcontractingllc.com" target="_blank" rel="noopener">CM General Contracting</a><span>Roofing and contracting</span></li>
+        <li><a href="https://nancyisrealestate.com" target="_blank" rel="noopener">Nancy Is Real Estate</a><span>Real estate, lead generation</span></li>
+        <li><a href="https://911gadgets.com" target="_blank" rel="noopener">911 Gadgets</a><span>Electronics repair</span></li>
+      </ul>
+    </div>
   </div>
-
-  <table class="ledger reveal">
-    <thead>
-      <tr><th class="n">#</th><th>Client</th><th class="hide-col">Sector</th><th class="hide-col">Platform</th><th></th></tr>
-    </thead>
-    <tbody id="ledgerBody"></tbody>
-  </table>
-  <p class="footnote reveal">Want the detail on any one of these? Ask me in the form below and I will walk you through what was broken and what I changed.</p>
 </section>
 
-<!-- SERVICES -->
 <section id="services">
-  <div class="eyebrow reveal"><i>02</i><hr><i>What I take on</i></div>
-  <h2 class="reveal">Three jobs.<br>Each starts with a backup.</h2>
-
-  <div class="row reveal">
-    <div class="row-n">01</div>
-    <div>
-      <h3>Speed and Core Web Vitals</h3>
-      <p>The site is slow because of a bloated builder, uncompressed images and no caching layer. I find which one it is, instead of installing another cache plugin on top of the last one.</p>
-      <div class="tags"><span class="tag">LiteSpeed Cache</span><span class="tag">Cloudflare CDN</span><span class="tag">SiteGround Optimizer</span></div>
+  <div class="sec">
+    <h2>What I take on</h2>
+    <div class="body">
+      <div class="svc">
+        <h3>Speed</h3>
+        <p>I start with a PageSpeed and GTmetrix baseline, work out whether the builder, images or caching is the cause, and hand you the before and after scores.</p>
+        <p class="tools">Usually with LiteSpeed Cache, Cloudflare or SiteGround Speed Optimizer.</p>
+      </div>
+      <div class="svc">
+        <h3>Migrations and hosting</h3>
+        <p>Host to host, domain to domain, staging to live. A full backup and a staging clone exist before anything moves, so a bad cutover can be undone.</p>
+        <p class="tools">Afterwards I check permalinks, forms and email. I also set up DNS, SSL and professional email, on cPanel, WHM or Plesk.</p>
+      </div>
+      <div class="svc">
+        <h3>WooCommerce repairs and builds</h3>
+        <p>Checkout errors, cart bugs, payment gateways failing on mobile, a theme fighting a plugin. I also build stores from nothing, with custom PHP and jQuery where a plugin would be overkill.</p>
+      </div>
     </div>
-    <ul>
-      <li>GTmetrix and PageSpeed baseline before I touch anything</li>
-      <li>Caching, minification, database cleanup, heartbeat control</li>
-      <li>Image and font optimization, LCP and CLS fixes</li>
-      <li>Plugin audit: remove the bloat, keep the function</li>
-      <li>Before and after scores at handover</li>
-    </ul>
-  </div>
-
-  <div class="row reveal">
-    <div class="row-n">02</div>
-    <div>
-      <h3>Migration, hosting and server setup</h3>
-      <p>Host to host, domain to domain, staging to live. Full backup and a staging clone exist before anything moves, so a bad cutover is recoverable rather than fatal.</p>
-      <div class="tags"><span class="tag">cPanel / WHM</span><span class="tag">Plesk</span><span class="tag">DNS + SSL</span><span class="tag">Duplicator</span><span class="tag">UpdraftPlus</span></div>
-    </div>
-    <ul>
-      <li>Manual database backup and restore, or migration plugins where it is safer</li>
-      <li>DNS, SSL certificates and professional email setup</li>
-      <li>Permalinks, forms and email deliverability checked after the move</li>
-      <li>Security hardening, backup schedule, uptime monitoring</li>
-    </ul>
-  </div>
-
-  <div class="row reveal">
-    <div class="row-n">03</div>
-    <div>
-      <h3>WooCommerce builds and rescue jobs</h3>
-      <p>Checkout errors, cart bugs, payment gateways failing on mobile, a theme fighting a plugin. Also full builds when you are starting from nothing.</p>
-      <div class="tags"><span class="tag">WooCommerce</span><span class="tag">Elementor Pro</span><span class="tag">Divi</span><span class="tag">WPBakery</span><span class="tag">Shopify</span></div>
-    </div>
-    <ul>
-      <li>Checkout, cart and payment gateway debugging</li>
-      <li>Plugin and theme conflict resolution</li>
-      <li>Product page and store speed work</li>
-      <li>Custom PHP and jQuery where a plugin would be overkill</li>
-    </ul>
   </div>
 </section>
 
-<!-- HONEST CASE NOTE + BOUNDARIES -->
 <section id="stack">
-  <div class="eyebrow reveal"><i>03</i><hr><i>Stack and limits</i></div>
-  <div class="split">
-    <div class="reveal">
-      <h2>What I actually<br>work in.</h2>
-      <div class="stack-group">
-        <h4>Daily</h4>
-        <p>WordPress, WooCommerce, Elementor Pro, Divi, WPBakery. PHP, jQuery, HTML5, CSS3, Bootstrap. Custom themes and plugin tweaks.</p>
+  <div class="sec">
+    <h2>Stack</h2>
+    <div class="body">
+      <div class="stack">
+        <h3>Daily</h3>
+        <p>WordPress, WooCommerce, Elementor Pro, Divi, WPBakery, PHP, jQuery, HTML, CSS, Bootstrap.</p>
       </div>
-      <div class="stack-group">
-        <h4>Performance</h4>
-        <p>LiteSpeed Cache, Cloudflare CDN, SiteGround Speed Optimizer. LCP, CLS and INP work. GTmetrix and PageSpeed Insights for measurement.</p>
+      <div class="stack">
+        <h3>Speed and servers</h3>
+        <p>LiteSpeed Cache, Cloudflare, SiteGround Speed Optimizer, LCP, CLS and INP work. cPanel, WHM, Plesk, DNS, SSL, backups.</p>
       </div>
-      <div class="stack-group">
-        <h4>Server</h4>
-        <p>cPanel, WHM, Plesk. DNS, SSL, email configuration, backups, uptime monitoring, server space and resource cleanup.</p>
+      <div class="stack">
+        <h3>Also</h3>
+        <p>Shopify (Liquid) and Wix builds. On-page SEO with Yoast, Rank Math and All in One SEO.</p>
       </div>
-      <div class="stack-group">
-        <h4>Also</h4>
-        <p>Shopify (Liquid) and Wix builds. On-page SEO with Yoast, Rank Math and All in One SEO, typically landing in the 70-80 score range. Power BI dashboards fed from Excel.</p>
-      </div>
-      <div class="stack-group">
-        <h4>Not my lane</h4>
-        <p>Google Analytics 4, Search Console, schema markup and paid ads. I have read about them. I have not run them on a client site, so I will not bill you for them. Bring your marketing person, or I will point you at one.</p>
-      </div>
-    </div>
-
-    <div class="reveal">
-      <h2>One that<br>didn't launch.</h2>
-      <div class="note" style="margin-top:28px">
-        <h3>Hostlint redesign</h3>
-        <p>At Meer Technologies I ran a full redesign of hostlint.com on my own: marketing, build, content, pricing and project management. It started on WordPress, but the host could not carry the weight, so I rebuilt it as a custom theme in HTML, CSS, JavaScript and PHP.</p>
-        <p>It reached launch-ready and never went live. The client had personal reasons, images from the designer ran late, and the company moved its attention to the Amazon side of the business.</p>
-        <p>I keep it on here because knowing when a WordPress install is the wrong answer is the same instinct that keeps your site fast.</p>
-      </div>
-      <div class="note" style="margin-top:40px">
-        <h3>Credentials</h3>
-        <p>BS Computer Science, Abbottabad University of Science &amp; Technology, 2018-2022.</p>
-        <p>Coursera: <a class="ph" href="https://coursera.org/verify/868SKTJQGQQ4" target="_blank" rel="noopener">Foundations of Digital Marketing and E-commerce (Google)</a> and <a class="ph" href="https://www.coursera.org/account/accomplishments/certificate/6F427EP6FS5E" target="_blank" rel="noopener">SEO with Squarespace</a>.</p>
+      <div class="stack">
+        <h3>Not my lane</h3>
+        <div class="limit"><p>I don't do GA4, Search Console, schema or paid ads. I haven't run them on a client site, so I won't bill you for them.</p></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- EXPERIENCE -->
 <section id="experience">
-  <div class="eyebrow reveal"><i>04</i><hr><i>Where I have worked</i></div>
-  <h2 class="reveal">Experience.</h2>
-
-  <div class="job reveal" style="margin-top:32px">
-    <div class="when">Aug 2026 &mdash; now</div>
-    <div>
-      <h3>Independent WordPress developer</h3>
-      <div class="where">Self-employed, remote</div>
-      <p>Project work for clients found through LinkedIn and freelance communities. Speed audits, migrations and WooCommerce repairs.</p>
-    </div>
-  </div>
-
-  <div class="job reveal">
-    <div class="when">May 2024 &mdash; Aug 2025</div>
-    <div>
-      <h3>WordPress developer</h3>
-      <div class="where">Digital Clics Marketing, remote</div>
-      <p>Built and maintained client sites on WordPress, Shopify and Wix. On the optimization jobs, moved PageSpeed and GTmetrix scores out of the 40s and 50s into the 70-80+ range on desktop and mobile. Handled cPanel, WHM, Plesk, DNS, SSL and migrations.</p>
-    </div>
-  </div>
-
-  <div class="job reveal">
-    <div class="when">Jun 2023 &mdash; Jul 2024</div>
-    <div>
-      <h3>Technical project lead &amp; e-commerce specialist</h3>
-      <div class="where">Meer Technologies</div>
-      <p>Ran the Hostlint redesign solo from concept to launch-ready. Built the Amazon, eBay and Walmart operation from zero to $35,000+ in profit, with Power BI dashboards on top of the Excel data.</p>
-    </div>
-  </div>
-
-  <div class="job reveal">
-    <div class="when">Dec 2022 &mdash; Jun 2023</div>
-    <div>
-      <h3>Web developer, intern</h3>
-      <div class="where">Kawish IT Services</div>
-      <p>WordPress, Shopify and Wix builds, plus the HTML, CSS, JavaScript, Bootstrap, jQuery and PHP underneath them. Sourced and delivered two client projects independently through Upwork.</p>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="eyebrow reveal"><i>05</i><hr><i>Start here</i></div>
-  <div class="split">
-    <div class="reveal">
-      <h2>Send me the URL<br>and what is wrong.</h2>
-      <p class="lead">You get back your current PageSpeed and GTmetrix numbers, the three things costing you the most, and a fixed price to fix them. No call needed unless you want one.</p>
-
-      <div style="margin-top:40px">
-        <div class="contact-line"><span>Email</span><a href="mailto:amnajadoon07@gmail.com" class="ph">amnajadoon07@gmail.com</a></div>
-        <div class="contact-line"><span>LinkedIn</span><a href="https://www.linkedin.com/in/amnajadoon/" class="ph" target="_blank" rel="noopener">linkedin.com/in/amnajadoon</a></div>
-        <div class="contact-line"><span>Based in</span><span>Abbottabad, Pakistan. UTC+5, working remote.</span></div>
+  <div class="sec">
+    <h2>Experience</h2>
+    <div class="body">
+      <div class="job">
+        <div class="when">Aug 2026 to now</div>
+        <div>
+          <h3>Independent WordPress developer</h3>
+          <div class="where">Self-employed, remote</div>
+          <p>Speed audits, migrations and WooCommerce repairs.</p>
+        </div>
       </div>
-      <p class="footnote">Useful things to include: hosting provider, whether you have admin access, and a screenshot of the error.</p>
+      <div class="job">
+        <div class="when">May 2024 to Aug 2025</div>
+        <div>
+          <h3>WordPress developer</h3>
+          <div class="where">Digital Clics Marketing, remote</div>
+          <p>Built and maintained client sites on WordPress, Shopify and Wix. On optimization jobs, moved PageSpeed and GTmetrix scores from the 40s and 50s to 70-80+ on desktop and mobile. Handled servers, DNS, SSL and migrations.</p>
+        </div>
+      </div>
+      <div class="job">
+        <div class="when">Jun 2023 to Jul 2024</div>
+        <div>
+          <h3>Technical project lead and e-commerce specialist</h3>
+          <div class="where">Meer Technologies</div>
+          <p>Ran the Hostlint redesign to launch-ready on my own, rebuilding it as a custom PHP theme when WordPress was too heavy for its host. It didn't launch. Built the Amazon, eBay and Walmart operation from zero to $35,000+ in profit.</p>
+        </div>
+      </div>
+      <div class="job">
+        <div class="when">Dec 2022 to Jun 2023</div>
+        <div>
+          <h3>Web developer, intern</h3>
+          <div class="where">Kawish IT Services</div>
+          <p>WordPress and Shopify builds. Sourced and delivered two client projects independently through Upwork.</p>
+        </div>
+      </div>
+      <div class="creds">
+        <h3>Education</h3>
+        <p>BS Computer Science, Abbottabad University of Science &amp; Technology, 2018 to 2022.</p>
+        <p><a href="https://coursera.org/verify/868SKTJQGQQ4" target="_blank" rel="noopener">Foundations of Digital Marketing and E-commerce</a> (Google, on Coursera).</p>
+      </div>
     </div>
-
-    <form class="reveal" action="https://formsubmit.co/amnajadoon07@gmail.com" method="POST">
-      <input type="hidden" name="_subject" value="New portfolio enquiry">
-      <label for="n">Your name</label>
-      <input class="field" id="n" name="name" required placeholder="Name">
-      <label for="e">Email</label>
-      <input class="field" id="e" type="email" name="email" required placeholder="you@company.com">
-      <label for="u">Site URL</label>
-      <input class="field" id="u" name="url" placeholder="https://">
-      <label for="s">What you need</label>
-      <select class="field" id="s" name="service">
-        <option>Speed optimization</option>
-        <option>Migration or hosting move</option>
-        <option>WooCommerce fix</option>
-        <option>New build or redesign</option>
-        <option>Something else</option>
-      </select>
-      <label for="m">What is wrong</label>
-      <textarea class="field" id="m" name="message" rows="4" required placeholder="Homepage takes 8 seconds. Checkout fails on mobile. GTmetrix says 47."></textarea>
-      <button class="btn" type="submit" style="margin-top:34px;cursor:pointer">Send it</button>
-    </form>
   </div>
 </section>
+
+<section id="contact">
+  <div class="sec">
+    <h2>Send me the URL and what's wrong</h2>
+    <div class="body">
+      <p class="lead dim">Useful to include: your hosting provider, whether you have admin access, and the error you're seeing. No call needed unless you want one.</p>
+      <form action="https://formsubmit.co/amnajadoon07@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="New portfolio enquiry">
+        <input type="hidden" name="_next" value="https://amnajadoon-dev.github.io/thanks.html">
+        <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <label for="u">Site URL</label>
+        <input class="field" id="u" name="url" inputmode="url" placeholder="yoursite.com">
+        <label for="n">Your name</label>
+        <input class="field" id="n" name="name" autocomplete="name" required>
+        <label for="e">Email</label>
+        <input class="field" id="e" type="email" name="email" autocomplete="email" required>
+        <label for="s">What you need</label>
+        <select class="field" id="s" name="service">
+          <option>Speed optimization</option>
+          <option>Migration or hosting move</option>
+          <option>WooCommerce fix</option>
+          <option>New build or redesign</option>
+          <option>Something else</option>
+        </select>
+        <label for="m">What's wrong</label>
+        <textarea class="field" id="m" name="message" rows="4" required placeholder="Homepage takes 8 seconds. Checkout fails on mobile. GTmetrix says 47."></textarea>
+        <button class="btn" type="submit">Send it</button>
+      </form>
+      <div class="contact-lines">
+        <p>Or email <a href="mailto:amnajadoon07@gmail.com">amnajadoon07@gmail.com</a></p>
+        <p>LinkedIn: <a href="https://www.linkedin.com/in/amnajadoon/" target="_blank" rel="noopener">linkedin.com/in/amnajadoon</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
 
 <footer>
-  <div>Amna Jadoon &copy; 2026 / WordPress developer, Abbottabad PK</div>
-  <div><a href="#top">Back to top</a></div>
+  <div>Amna Jadoon, WordPress developer, Abbottabad, Pakistan. English and Urdu.</div>
+  <a href="#top">Back to top</a>
 </footer>
 
-</div>
-
 <script>
-/* 11 real client projects, built at Digital Clics Marketing */
-var P=[
- ["Marysol Flower Designs","Florist retail","WordPress + WooCommerce","https://marysolflowerdesigns.com","woo"],
- ["Otra Pizzeria PHX","Restaurant, online menu","WordPress","https://otrapizzeriaphx.com","wp"],
- ["Julio's Projects","Retail store","Wix","https://juliosprojects.com","other"],
- ["QuikSlips","POS platform","WordPress","https://quikslips.com","wp"],
- ["Digital Clics","Marketing agency","WordPress","https://digitalclics.com","wp"],
- ["Padrino Tunes","Music and media","Hostinger AI Builder","https://padrinotunes.com","other"],
- ["Koba Construction LLC","Commercial construction","WordPress","https://kobaconstructionllc.com","wp"],
- ["CM General Contracting LLC","General contracting","WordPress","https://cmgeneralcontractingllc.com","wp"],
- ["Avia Performance","Automotive retail, Australia","WordPress + WooCommerce","https://aviaperformance.com.au","woo"],
- ["Nancy Is Real Estate","Real estate, lead generation","WordPress","https://nancyisrealestate.com","wp"],
- ["911 Gadgets","Electronics repair","WordPress","https://911gadgets.com","wp"]
-];
-function draw(f){
-  var b=document.getElementById('ledgerBody'),h='',i=0;
-  P.forEach(function(p){
-    if(f!=='all'&&p[4]!==f)return;
-    i++;
-    h+='<tr><td class="n">'+(i<10?'0':'')+i+'</td>'+
-       '<td><a class="name" href="'+p[3]+'" target="_blank" rel="noopener">'+p[0]+'</a><span class="meta sub">'+p[1]+' / '+p[2]+'</span></td>'+
-       '<td class="meta hide-col">'+p[1]+'</td>'+
-       '<td class="meta hide-col">'+p[2]+'</td>'+
-       '<td style="text-align:right"><a class="go" href="'+p[3]+'" target="_blank" rel="noopener">Visit &#8599;</a></td></tr>';
-  });
-  b.innerHTML=h;
-}
-draw('all');
-document.getElementById('filters').addEventListener('click',function(e){
-  var t=e.target.closest('button'); if(!t)return;
-  [].forEach.call(this.children,function(c){c.classList.remove('on')});
-  t.classList.add('on'); draw(t.dataset.f);
-});
-
-/* mobile nav */
-var bg=document.getElementById('burger');
+var nav=document.getElementById('site-nav'),bg=document.getElementById('burger');
 bg.addEventListener('click',function(){
-  bg.setAttribute('aria-expanded',document.getElementById('m-nav').classList.toggle('open'));
+  bg.setAttribute('aria-expanded',nav.classList.toggle('open'));
 });
-[].forEach.call(document.querySelectorAll('#m-nav a'),function(a){
-  a.addEventListener('click',function(){
-    document.getElementById('m-nav').classList.remove('open');
-    bg.setAttribute('aria-expanded','false');
-  });
+nav.addEventListener('click',function(e){
+  if(e.target.tagName==='A'){nav.classList.remove('open');bg.setAttribute('aria-expanded','false');}
 });
 
-/* reveal + active rail link, no libraries */
-var io=new IntersectionObserver(function(es){
-  es.forEach(function(en){ if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);} });
-},{threshold:.12});
-[].forEach.call(document.querySelectorAll('.reveal'),function(el){io.observe(el)});
-
-var links=document.querySelectorAll('#railNav a');
-var spy=new IntersectionObserver(function(es){
-  es.forEach(function(en){
-    if(en.isIntersecting){
-      [].forEach.call(links,function(l){l.classList.toggle('on',l.getAttribute('href')==='#'+en.target.id)});
-    }
-  });
-},{rootMargin:'-45% 0px -50% 0px'});
-['work','services','stack','experience','contact'].forEach(function(id){
-  var s=document.getElementById(id); if(s)spy.observe(s);
+document.getElementById('start').addEventListener('submit',function(e){
+  e.preventDefault();
+  document.getElementById('u').value=document.getElementById('hero-url').value.trim();
+  document.getElementById('contact').scrollIntoView();
+  document.getElementById('n').focus({preventScroll:true});
 });
 </script>
 </body>
