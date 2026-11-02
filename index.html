@@ -18,16 +18,24 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet">
+<script>document.documentElement.className='js'</script>
 <style>
 :root{
-  --paper:#F4F1EA;
+  --paper:#F7F3EA;
+  --card:#FFFDF8;
   --ink:#171512;
   --ink-dim:rgba(23,21,18,.74);
-  --rule:rgba(23,21,18,.18);
+  --rule:rgba(23,21,18,.16);
+  --forest:#0E2A22;
+  --forest-2:#16392F;
+  --mist:rgba(247,243,234,.8);
+  --mist-rule:rgba(247,243,234,.2);
   --pass:#0CCE6B;
+  --gold:#FFB627;
   --serif:'Source Serif 4',Georgia,serif;
   --sans:system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
   --pad:clamp(20px,5vw,64px);
+  --wide:1240px;
   color-scheme:light;
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -35,97 +43,196 @@ html{scroll-behavior:smooth}
 body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
 ::selection{background:var(--pass);color:var(--ink)}
 a{color:inherit;text-underline-offset:3px}
-:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+img{display:block;max-width:100%;height:auto}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 h1,h2,h3{font-family:var(--serif);font-weight:700;line-height:1.08;letter-spacing:-.015em}
-h1{font-size:clamp(40px,7vw,84px);max-width:13ch}
-h2{font-size:clamp(28px,3vw,38px)}
-h3{font-size:clamp(21px,2vw,25px);font-weight:600}
+h1{font-size:clamp(40px,5.8vw,76px)}
+h2{font-size:clamp(32px,4.2vw,54px)}
+h3{font-size:clamp(21px,2vw,26px);font-weight:600}
+.wrap{max-width:var(--wide);margin:0 auto}
 .dim{color:var(--ink-dim)}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+.js .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.8,.2,1)}
+.js .reveal.in{opacity:1;transform:none}
 
 /* top bar */
-.bar{position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:12px var(--pad);background:var(--paper);border-bottom:1px solid var(--rule)}
+.bar{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:12px var(--pad);background:var(--forest);color:var(--paper);border-bottom:1px solid var(--mist-rule)}
 .bar-name{font-family:var(--serif);font-weight:700;font-size:20px;text-decoration:none;padding:8px 0}
 .bar nav{display:flex;gap:26px}
 .bar nav a{font-size:15px;text-decoration:none;padding:8px 0}
-.bar nav a:hover{text-decoration:underline}
-#burger{display:none;background:none;border:1px solid var(--ink);color:var(--ink);font:inherit;font-size:15px;padding:9px 14px;cursor:pointer}
+.bar nav a:hover{color:var(--pass)}
+#burger{display:none;background:none;border:1px solid var(--paper);color:var(--paper);font:inherit;font-size:15px;padding:9px 14px;cursor:pointer}
 @media(max-width:759px){
   #burger{display:block}
-  .bar nav{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;padding:4px var(--pad) 16px;background:var(--paper);border-bottom:1px solid var(--rule)}
+  .bar nav{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;padding:4px var(--pad) 16px;background:var(--forest);border-bottom:1px solid var(--mist-rule)}
   .bar nav.open{display:flex}
-  .bar nav a{padding:14px 0;border-bottom:1px solid var(--rule);font-size:16px}
+  .bar nav a{padding:14px 0;border-bottom:1px solid var(--mist-rule);font-size:16px}
 }
 
-/* sections: heading in a side column on wide screens */
-section{padding:clamp(52px,8vw,104px) var(--pad);border-bottom:1px solid var(--rule);scroll-margin-top:60px}
-.sec{display:grid;gap:26px}
-.sec>*{min-width:0}
-@media(min-width:900px){.sec{grid-template-columns:220px minmax(0,1fr);gap:56px}}
-.body{max-width:760px}
-.lead{font-size:clamp(17px,1.5vw,19px);margin-bottom:34px}
+section{padding:clamp(60px,8vw,110px) var(--pad);scroll-margin-top:60px}
+.sec-head{max-width:720px;margin-bottom:clamp(32px,4vw,52px)}
+.sec-head p{margin-top:14px;font-size:clamp(17px,1.5vw,19px)}
+.kicker{display:inline-block;background:var(--gold);color:var(--ink);font-size:14px;font-weight:700;padding:3px 10px;margin-bottom:14px}
 
 /* hero */
-.hero p.offer{margin-top:24px;max-width:50ch;font-size:clamp(18px,1.7vw,21px)}
-.url-form{margin-top:32px;max-width:620px}
-.url-form label{margin-top:0}
+.hero{background:var(--forest);color:var(--paper);overflow:hidden;padding-top:clamp(44px,6vw,84px);padding-bottom:clamp(52px,7vw,96px)}
+.hero-grid{display:grid;gap:44px;align-items:center}
+.hero-grid>*{min-width:0}
+@media(min-width:980px){.hero-grid{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:64px}}
+.hero h1 em{font-style:normal;color:var(--pass)}
+.hero .offer{margin-top:22px;max-width:50ch;font-size:clamp(18px,1.7vw,21px);color:var(--mist)}
+.url-form{margin-top:30px;max-width:580px}
+.url-form label{margin-top:0;color:var(--paper)}
 .url-row{display:flex;gap:10px}
 .url-row .field{flex:1;min-width:0}
-.hero .fact{margin-top:30px;max-width:56ch;font-size:15.5px}
 @media(max-width:519px){.url-row{flex-direction:column}}
+.hero .fact{margin-top:24px;max-width:56ch;font-size:15.5px;color:var(--mist)}
 
-/* buttons and fields */
-.btn{background:var(--ink);color:var(--paper);border:1px solid var(--ink);font:inherit;font-weight:600;padding:13px 24px;min-height:50px;cursor:pointer}
-.btn:hover{background:transparent;color:var(--ink)}
-label{display:block;font-size:15px;font-weight:600;margin:20px 0 6px}
-.field{display:block;width:100%;background:#FFFDF8;border:1px solid var(--ink);border-radius:0;color:var(--ink);font:inherit;font-size:16px;padding:12px;min-height:50px}
-.field::placeholder{color:var(--ink-dim)}
-.hp{position:absolute;left:-9999px}
+/* hero picture: a real client site with the report card on top */
+.collage{position:relative;padding:0 0 70px}
+.collage .browser{transform:rotate(-1.6deg);max-width:560px}
+.report{position:absolute;right:0;bottom:0;width:min(340px,86%);background:var(--card);color:var(--ink);padding:20px;box-shadow:0 22px 50px rgba(0,0,0,.4);border-top:6px solid var(--pass)}
+.report b{display:block;font-family:var(--serif);font-size:19px;line-height:1.2}
+@media(max-width:979px){
+  .collage{padding:0;max-width:560px}
+  .report{position:relative;width:auto;margin:-18px 0 0 18px}
+}
+.rings{display:flex;flex-wrap:wrap;gap:10px 18px;margin:14px 0}
+.ring{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600}
+.ring svg{width:46px;height:46px;flex:none}
+.ring circle{fill:none;stroke-width:5}
+.ring .track{stroke:var(--rule)}
+.ring .arc{stroke:var(--pass);stroke-linecap:round;stroke-dasharray:113;stroke-dashoffset:113;transform:rotate(-90deg);transform-origin:center;animation:fill 1.8s .4s cubic-bezier(.2,.8,.2,1) forwards}
+.ring:nth-child(2) .arc{animation-delay:.8s}
+.ring text{font:700 17px var(--serif);fill:var(--ink);text-anchor:middle;dominant-baseline:central}
+@keyframes fill{to{stroke-dashoffset:28}}
+.report ol{list-style:none;font-size:14.5px;border-top:1px solid var(--rule);padding-top:10px}
+.report li{padding:3px 0}
+.report li.price{font-weight:700}
+
+/* browser frame around every screenshot */
+.browser{background:var(--card);border-radius:8px;overflow:hidden;box-shadow:0 14px 36px rgba(14,42,34,.24)}
+.browser::before{content:"";display:block;height:24px;background:#E7E2D6 radial-gradient(circle at 14px 12px,#FF6B5E 4px,transparent 5px) no-repeat}
+.browser img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top}
+
+/* tool strip */
+.strip{background:var(--pass);color:var(--ink);overflow:hidden;padding:13px 0;font-weight:700;font-size:16px}
+.strip-move{display:flex;width:max-content;animation:slide 34s linear infinite}
+.strip ul{display:flex;list-style:none}
+.strip li{padding:0 22px;white-space:nowrap}
+.strip li+li{border-left:2px solid rgba(23,21,18,.3)}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* numbers */
+.nums{background:var(--paper);padding-top:clamp(44px,5vw,64px);padding-bottom:0}
+.nums-grid{display:grid;gap:20px}
+@media(min-width:760px){.nums-grid{grid-template-columns:repeat(3,1fr)}}
+.num strong{display:block;font-family:var(--serif);font-size:clamp(46px,5.4vw,70px);line-height:1;color:var(--forest)}
+.num span{display:block;margin-top:6px;color:var(--ink-dim)}
 
 /* work */
-.case{border-left:4px solid var(--pass);padding:2px 0 2px 20px;margin-bottom:38px}
-.case p{margin-top:10px;color:var(--ink-dim);max-width:62ch}
-.case a.visit{display:inline-block;margin-top:8px;padding:6px 0;font-size:15px}
-h3.others{margin:44px 0 6px}
-.sites{list-style:none;border-top:1px solid var(--rule);margin-top:14px}
-.sites li{display:flex;flex-wrap:wrap;justify-content:space-between;gap:2px 20px;padding:13px 0;border-bottom:1px solid var(--rule)}
-.sites a{font-weight:600;display:inline-block;padding:5px 0}
-.sites span{font-size:15px;color:var(--ink-dim)}
+.case{display:grid;gap:22px;align-items:center;margin-bottom:clamp(40px,5vw,68px)}
+.case>*{min-width:0}
+@media(min-width:860px){
+  .case{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:52px}
+  .case.flip .browser{order:2}
+}
+.case .browser{transition:transform .25s}
+.case:hover .browser{transform:translateY(-5px)}
+.case p{margin-top:10px;color:var(--ink-dim)}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+.tags span{background:var(--forest);color:var(--paper);font-size:13.5px;padding:3px 10px}
+.btn-line{display:inline-block;margin-top:14px;padding:6px 0;font-weight:700}
+h3.others{margin:0 0 20px;font-size:clamp(24px,2.6vw,32px)}
+.gallery{display:grid;gap:26px 22px;grid-template-columns:repeat(auto-fill,minmax(min(100%,270px),1fr))}
+.tile{text-decoration:none;display:block}
+.tile .browser{transition:transform .25s,box-shadow .25s}
+.tile:hover .browser{transform:translateY(-5px);box-shadow:0 20px 42px rgba(14,42,34,.32)}
+.tile b{display:block;margin-top:12px;font-size:17px}
+.tile span{display:block;font-size:15px;color:var(--ink-dim)}
+
+/* how it works */
+.how{background:var(--forest);color:var(--paper)}
+.how .sec-head p{color:var(--mist)}
+.steps{list-style:none;display:grid;gap:0;counter-reset:s}
+.steps>li{position:relative;padding:0 0 30px 62px;counter-increment:s}
+.steps>li::before{content:counter(s);position:absolute;left:0;top:0;width:44px;height:44px;border-radius:50%;background:var(--pass);color:var(--ink);font:700 20px/44px var(--serif);text-align:center}
+.steps>li::after{content:"";position:absolute;left:21px;top:44px;bottom:0;width:2px;background:var(--mist-rule)}
+.steps>li:last-child::after{display:none}
+.steps h3{padding-top:7px}
+.steps p{margin-top:7px;color:var(--mist);max-width:44ch}
+@media(min-width:900px){
+  .steps{grid-template-columns:repeat(4,1fr);gap:26px}
+  .steps>li{padding:62px 0 0}
+  .steps>li::after{left:52px;right:-26px;top:21px;bottom:auto;width:auto;height:2px}
+}
 
 /* services */
-.svc{padding:28px 0;border-top:1px solid var(--rule)}
-.svc:first-child{border-top:0;padding-top:0}
-.svc>p{margin-top:10px;color:var(--ink-dim);max-width:62ch}
-.svc ul{margin:12px 0 0 20px;color:var(--ink-dim);font-size:16px}
-.svc li{padding:3px 0}
-.tools{font-size:15px}
+.svc-grid{display:grid;gap:20px}
+.svc-grid>*{min-width:0}
+@media(min-width:900px){.svc-grid{grid-template-columns:1.2fr 1fr 1fr}}
+.svc{background:var(--card);border-top:6px solid var(--forest);padding:26px;box-shadow:0 8px 24px rgba(14,42,34,.08)}
+.svc.hot{background:var(--pass);border-top-color:var(--ink)}
+.svc.warm{background:var(--gold);border-top-color:var(--ink)}
+.svc svg{width:44px;height:44px;margin-bottom:14px;fill:none;stroke:var(--ink);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.svc p{margin-top:10px}
+.svc p.tools{font-size:15px}
 
 /* stack */
-.stack{padding:18px 0;border-top:1px solid var(--rule)}
-.stack:first-child{border-top:0;padding-top:0}
-.stack h3{font-family:var(--sans);font-size:16px;font-weight:700;letter-spacing:0}
-.stack p{margin-top:6px;color:var(--ink-dim)}
-.limit{border-left:4px solid var(--ink);padding-left:20px;margin-top:14px}
-.limit p{color:var(--ink)}
+.stack-sec{padding-top:0}
+.stack-grid{display:grid;gap:36px}
+.stack-grid>*{min-width:0}
+@media(min-width:900px){.stack-grid{grid-template-columns:1.4fr 1fr;gap:56px}}
+.stack h3{font-family:var(--sans);font-size:16px;font-weight:700;letter-spacing:0;margin:20px 0 10px}
+.stack h3:first-of-type{margin-top:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;list-style:none}
+.chips li{background:var(--card);border:1px solid var(--rule);font-size:15px;padding:5px 12px}
+.limit{background:var(--forest);color:var(--paper);padding:28px;border-left:8px solid var(--gold);align-self:start}
+.limit p{margin-top:10px;color:var(--mist)}
 
 /* experience */
-.job{display:grid;gap:4px;padding:22px 0;border-top:1px solid var(--rule)}
-.job:first-child{border-top:0;padding-top:0}
-.job>*{min-width:0}
-@media(min-width:680px){.job{grid-template-columns:150px minmax(0,1fr);gap:0 24px}}
-.when{font-size:15px;color:var(--ink-dim);padding-top:3px}
+.exp{background:#EDE7D8}
+.tl{position:relative;max-width:860px}
+.job{position:relative;padding:0 0 32px 34px;border-left:2px solid var(--forest);margin-left:7px}
+.job:last-child{padding-bottom:0}
+.job::before{content:"";position:absolute;left:-9px;top:6px;width:16px;height:16px;border-radius:50%;background:var(--pass);border:2px solid var(--forest)}
+.when{font-size:15px;font-weight:700;color:var(--forest)}
 .where{font-size:15px;font-weight:600;margin-top:5px}
-.job p{margin-top:8px;color:var(--ink-dim);max-width:60ch}
-.creds{margin-top:30px;padding-top:22px;border-top:1px solid var(--rule)}
+.job h3{margin-top:3px}
+.job p{margin-top:8px;color:var(--ink-dim);max-width:62ch}
+.creds{margin-top:36px;max-width:860px;padding-top:22px;border-top:1px solid var(--rule)}
 .creds p{margin-top:6px;color:var(--ink-dim)}
+.creds a{display:inline-block}
 
 /* contact */
-.contact-lines{margin:26px 0 8px}
+.contact{background:var(--forest);color:var(--paper)}
+.contact-grid{display:grid;gap:36px}
+.contact-grid>*{min-width:0}
+@media(min-width:900px){.contact-grid{grid-template-columns:1fr minmax(0,1.1fr);gap:64px}}
+.contact .lead{margin-top:16px;color:var(--mist);font-size:clamp(17px,1.5vw,19px)}
+.contact-lines{margin-top:26px}
 .contact-lines p{padding:6px 0;overflow-wrap:anywhere}
-.contact-lines a{display:inline-block;padding:4px 0}
-#contact .btn{margin-top:26px}
-footer{padding:28px var(--pad);display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between;font-size:15px;color:var(--ink-dim)}
+.contact-lines a{display:inline-block;padding:4px 0;font-weight:600}
+.form-card{background:var(--card);color:var(--ink);padding:clamp(20px,3vw,34px);border-top:6px solid var(--pass)}
+.form-card label:first-of-type{margin-top:0}
+.form-card .btn{margin-top:24px}
+
+/* buttons and fields */
+.btn{background:var(--pass);color:var(--ink);border:2px solid var(--pass);font:inherit;font-weight:700;padding:12px 24px;min-height:50px;cursor:pointer;transition:background .18s,color .18s}
+.btn:hover{background:transparent;color:inherit}
+label{display:block;font-size:15px;font-weight:600;margin:18px 0 6px}
+.field{display:block;width:100%;background:#fff;border:1px solid var(--ink);border-radius:0;color:var(--ink);font:inherit;font-size:16px;padding:12px;min-height:50px}
+.field::placeholder{color:rgba(23,21,18,.66)}
+.hp{position:absolute;left:-9999px}
+
+footer{background:var(--forest);color:var(--mist);border-top:1px solid var(--mist-rule);padding:24px var(--pad);display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between;font-size:15px}
 footer a{display:inline-block;padding:4px 0}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .js .reveal{opacity:1;transform:none;transition:none}
+  .strip-move,.ring .arc{animation:none}
+  .ring .arc{stroke-dashoffset:28}
+}
 </style>
 </head>
 <body>
@@ -135,8 +242,8 @@ footer a{display:inline-block;padding:4px 0}
   <button id="burger" aria-controls="site-nav" aria-expanded="false">Menu</button>
   <nav id="site-nav">
     <a href="#work">Work</a>
+    <a href="#how">How it works</a>
     <a href="#services">Services</a>
-    <a href="#stack">Stack</a>
     <a href="#experience">Experience</a>
     <a href="#contact">Contact</a>
   </nav>
@@ -145,64 +252,123 @@ footer a{display:inline-block;padding:4px 0}
 <main>
 
 <section class="hero" id="top">
-  <h1>Slow WordPress site? Send me the URL.</h1>
-  <p class="offer dim">You get your PageSpeed and GTmetrix numbers, the three things costing you the most, and a fixed price to fix them.</p>
-  <form class="url-form" id="start" action="#contact">
-    <label for="hero-url">Your site</label>
-    <div class="url-row">
-      <input class="field" id="hero-url" inputmode="url" autocomplete="url" placeholder="yoursite.com">
-      <button class="btn" type="submit">Continue</button>
+  <div class="wrap hero-grid">
+    <div>
+      <h1>Slow WordPress site? <em>Send me the URL.</em></h1>
+      <p class="offer">You get your PageSpeed and GTmetrix numbers, the three things costing you the most, and a fixed price to fix them.</p>
+      <form class="url-form" id="start" action="#contact">
+        <label for="hero-url">Your site</label>
+        <div class="url-row">
+          <input class="field" id="hero-url" inputmode="url" autocomplete="url" placeholder="yoursite.com">
+          <button class="btn" type="submit">Continue</button>
+        </div>
+      </form>
+      <p class="fact">Taking new WordPress work, remote from Abbottabad, Pakistan (UTC+5).</p>
     </div>
-  </form>
-  <p class="fact dim">I've worked on WordPress sites since 2022, including 15 months at Digital Clics, a US agency. That's 60+ sites built, fixed or migrated. Taking new WordPress work, remote from Abbottabad, Pakistan (UTC+5).</p>
-</section>
-
-<section id="work">
-  <div class="sec">
-    <h2>Work</h2>
-    <div class="body">
-      <p class="lead dim">These were team projects at Digital Clics Marketing. Here's the part that was mine.</p>
-
-      <article class="case">
-        <h3>Marysol Flower Designs</h3>
-        <p>Set up the catalog and checkout for a florist: arrangement size and style options, delivery-date selection, and a mobile-first checkout.</p>
-        <a class="visit" href="https://marysolflowerdesigns.com" target="_blank" rel="noopener">Visit the site</a>
-      </article>
-
-      <article class="case">
-        <h3>Koba Construction</h3>
-        <p>Built a project showcase with image galleries and lead-capture forms for B2B buyers checking past work.</p>
-        <a class="visit" href="https://kobaconstructionllc.com" target="_blank" rel="noopener">Visit the site</a>
-      </article>
-
-      <h3 class="others">Other WordPress sites from the same team</h3>
-      <ul class="sites">
-        <li><a href="https://aviaperformance.com.au" target="_blank" rel="noopener">Avia Performance</a><span>Automotive retail, Australia, WooCommerce</span></li>
-        <li><a href="https://otrapizzeriaphx.com" target="_blank" rel="noopener">Otra Pizzeria PHX</a><span>Restaurant, online menu</span></li>
-        <li><a href="https://quikslips.com" target="_blank" rel="noopener">QuikSlips</a><span>POS platform</span></li>
-        <li><a href="https://cmgeneralcontractingllc.com" target="_blank" rel="noopener">CM General Contracting</a><span>Roofing and contracting</span></li>
-        <li><a href="https://nancyisrealestate.com" target="_blank" rel="noopener">Nancy Is Real Estate</a><span>Real estate, lead generation</span></li>
-        <li><a href="https://911gadgets.com" target="_blank" rel="noopener">911 Gadgets</a><span>Electronics repair</span></li>
-      </ul>
+    <div class="collage" aria-hidden="true">
+      <div class="browser"><img src="img/marysol.jpg" width="800" height="506" alt=""></div>
+      <div class="report">
+        <b>What you get back</b>
+        <div class="rings">
+          <div class="ring"><svg viewBox="0 0 46 46"><circle class="track" cx="23" cy="23" r="18"/><circle class="arc" cx="23" cy="23" r="18"/><text x="23" y="23">?</text></svg>PageSpeed</div>
+          <div class="ring"><svg viewBox="0 0 46 46"><circle class="track" cx="23" cy="23" r="18"/><circle class="arc" cx="23" cy="23" r="18"/><text x="23" y="23">?</text></svg>GTmetrix</div>
+        </div>
+        <ol>
+          <li>The three things costing you the most</li>
+          <li class="price">A fixed price to fix them</li>
+        </ol>
+      </div>
     </div>
   </div>
 </section>
 
+<div class="strip" aria-hidden="true">
+  <div class="strip-move">
+    <ul><li>WordPress</li><li>WooCommerce</li><li>Elementor Pro</li><li>Divi</li><li>LiteSpeed Cache</li><li>Cloudflare</li><li>cPanel</li><li>Plesk</li><li>Duplicator</li><li>UpdraftPlus</li></ul>
+    <ul><li>WordPress</li><li>WooCommerce</li><li>Elementor Pro</li><li>Divi</li><li>LiteSpeed Cache</li><li>Cloudflare</li><li>cPanel</li><li>Plesk</li><li>Duplicator</li><li>UpdraftPlus</li></ul>
+  </div>
+</div>
+
+<section class="nums">
+  <div class="wrap nums-grid">
+    <div class="num reveal"><strong>60+</strong><span>sites built, fixed or migrated</span></div>
+    <div class="num reveal"><strong>2022</strong><span>the year I started working on WordPress sites</span></div>
+    <div class="num reveal"><strong>15 months</strong><span>at Digital Clics, a US agency</span></div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>Real sites you can click.</h2>
+      <p class="dim">These were team projects at Digital Clics Marketing. Here's the part that was mine.</p>
+    </div>
+
+    <article class="case reveal">
+      <a class="browser" href="https://marysolflowerdesigns.com" target="_blank" rel="noopener"><img src="img/marysol.jpg" width="800" height="506" loading="lazy" alt="Marysol Flower Designs homepage"></a>
+      <div>
+        <h3>Marysol Flower Designs</h3>
+        <p>Set up the catalog and checkout for a florist: arrangement size and style options, delivery-date selection, and a mobile-first checkout.</p>
+        <div class="tags"><span>WooCommerce</span><span>Florist</span></div>
+        <a class="btn-line" href="https://marysolflowerdesigns.com" target="_blank" rel="noopener">Visit the site</a>
+      </div>
+    </article>
+
+    <article class="case flip reveal">
+      <a class="browser" href="https://kobaconstructionllc.com" target="_blank" rel="noopener"><img src="img/koba.jpg" width="800" height="506" loading="lazy" alt="Koba Construction homepage"></a>
+      <div>
+        <h3>Koba Construction</h3>
+        <p>Built a project showcase with image galleries and lead-capture forms for B2B buyers checking past work.</p>
+        <div class="tags"><span>WordPress</span><span>Construction</span></div>
+        <a class="btn-line" href="https://kobaconstructionllc.com" target="_blank" rel="noopener">Visit the site</a>
+      </div>
+    </article>
+
+    <h3 class="others reveal">Other WordPress sites from the same team</h3>
+    <div class="gallery">
+      <a class="tile reveal" href="https://aviaperformance.com.au" target="_blank" rel="noopener"><div class="browser"><img src="img/avia.jpg" width="800" height="506" loading="lazy" alt="Avia Performance homepage"></div><b>Avia Performance</b><span>Fitness and coaching, Australia</span></a>
+      <a class="tile reveal" href="https://otrapizzeriaphx.com" target="_blank" rel="noopener"><div class="browser"><img src="img/otra.jpg" width="800" height="506" loading="lazy" alt="Otra Pizzeria homepage"></div><b>Otra Pizzeria PHX</b><span>Restaurant, online menu</span></a>
+      <a class="tile reveal" href="https://nancyisrealestate.com" target="_blank" rel="noopener"><div class="browser"><img src="img/nancy.jpg" width="800" height="506" loading="lazy" alt="Nancy Is Real Estate homepage"></div><b>Nancy Is Real Estate</b><span>Real estate, lead generation</span></a>
+      <a class="tile reveal" href="https://cmgeneralcontractingllc.com" target="_blank" rel="noopener"><div class="browser"><img src="img/cm-general.jpg" width="800" height="496" loading="lazy" alt="CM General Contracting homepage"></div><b>CM General Contracting</b><span>Roofing and contracting</span></a>
+      <a class="tile reveal" href="https://911gadgets.com" target="_blank" rel="noopener"><div class="browser"><img src="img/911-gadgets.jpg" width="800" height="506" loading="lazy" alt="911 Gadgets homepage"></div><b>911 Gadgets</b><span>Electronics repair</span></a>
+      <a class="tile reveal" href="https://quikslips.com" target="_blank" rel="noopener"><div class="browser"><img src="img/quikslips.jpg" width="800" height="506" loading="lazy" alt="QuikSlips homepage"></div><b>QuikSlips</b><span>POS platform</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="how" id="how">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>How it works</h2>
+      <p>No call needed unless you want one.</p>
+    </div>
+    <ol class="steps">
+      <li class="reveal"><h3>Send me the URL</h3><p>Tell me what's wrong, your hosting provider, and whether you have admin access.</p></li>
+      <li class="reveal"><h3>Get your numbers</h3><p>PageSpeed and GTmetrix scores, the three things costing you the most, and a fixed price.</p></li>
+      <li class="reveal"><h3>Backup first</h3><p>A full backup exists before I touch anything, so a bad change can be undone.</p></li>
+      <li class="reveal"><h3>Before and after</h3><p>You get the before and after scores at handover.</p></li>
+    </ol>
+  </div>
+</section>
+
 <section id="services">
-  <div class="sec">
-    <h2>What I take on</h2>
-    <div class="body">
-      <div class="svc">
+  <div class="wrap">
+    <div class="sec-head reveal"><h2>What I take on</h2></div>
+    <div class="svc-grid">
+      <div class="svc hot reveal">
+        <svg viewBox="0 0 44 44" aria-hidden="true"><path d="M6 32a18 18 0 1 1 32 0"/><path d="M22 26l9-11"/><circle cx="22" cy="27" r="2.5"/></svg>
         <h3>Speed</h3>
         <p>I start with a PageSpeed and GTmetrix baseline, work out whether the builder, images or caching is the cause, and hand you the before and after scores.</p>
         <p class="tools">Usually with LiteSpeed Cache, Cloudflare or SiteGround Speed Optimizer.</p>
       </div>
-      <div class="svc">
+      <div class="svc reveal">
+        <svg viewBox="0 0 44 44" aria-hidden="true"><rect x="4" y="7" width="15" height="30" rx="2"/><rect x="25" y="7" width="15" height="30" rx="2"/><path d="M8 14h7M29 14h7M15 24h14M25 20l4 4-4 4"/></svg>
         <h3>Migrations and hosting</h3>
         <p>Host to host, domain to domain, staging to live. A full backup and a staging clone exist before anything moves, so a bad cutover can be undone.</p>
         <p class="tools">Afterwards I check permalinks, forms and email. I also set up DNS, SSL and professional email, on cPanel, WHM or Plesk.</p>
       </div>
-      <div class="svc">
+      <div class="svc warm reveal">
+        <svg viewBox="0 0 44 44" aria-hidden="true"><path d="M5 7h5l5 22h19l4-15H12"/><circle cx="18" cy="36" r="2.5"/><circle cx="32" cy="36" r="2.5"/></svg>
         <h3>WooCommerce repairs and builds</h3>
         <p>Checkout errors, cart bugs, payment gateways failing on mobile, a theme fighting a plugin. I also build stores from nothing, with custom PHP and jQuery where a plugin would be overkill.</p>
       </div>
@@ -210,107 +376,93 @@ footer a{display:inline-block;padding:4px 0}
   </div>
 </section>
 
-<section id="stack">
-  <div class="sec">
-    <h2>Stack</h2>
-    <div class="body">
-      <div class="stack">
-        <h3>Daily</h3>
-        <p>WordPress, WooCommerce, Elementor Pro, Divi, WPBakery, PHP, jQuery, HTML, CSS, Bootstrap.</p>
-      </div>
-      <div class="stack">
-        <h3>Speed and servers</h3>
-        <p>LiteSpeed Cache, Cloudflare, SiteGround Speed Optimizer, LCP, CLS and INP work. cPanel, WHM, Plesk, DNS, SSL, backups.</p>
-      </div>
-      <div class="stack">
-        <h3>Also</h3>
-        <p>Shopify (Liquid) and Wix builds. On-page SEO with Yoast, Rank Math and All in One SEO.</p>
-      </div>
-      <div class="stack">
-        <h3>Not my lane</h3>
-        <div class="limit"><p>I don't do GA4, Search Console, schema or paid ads. I haven't run them on a client site, so I won't bill you for them.</p></div>
-      </div>
+<section class="stack-sec" id="stack">
+  <div class="wrap stack-grid">
+    <div class="stack reveal">
+      <h2 style="margin-bottom:24px">Stack</h2>
+      <h3>Daily</h3>
+      <ul class="chips"><li>WordPress</li><li>WooCommerce</li><li>Elementor Pro</li><li>Divi</li><li>WPBakery</li><li>PHP</li><li>jQuery</li><li>HTML</li><li>CSS</li><li>Bootstrap</li></ul>
+      <h3>Speed and servers</h3>
+      <ul class="chips"><li>LiteSpeed Cache</li><li>Cloudflare</li><li>SiteGround Speed Optimizer</li><li>LCP, CLS, INP</li><li>cPanel</li><li>WHM</li><li>Plesk</li><li>DNS</li><li>SSL</li><li>Backups</li></ul>
+      <h3>Also</h3>
+      <ul class="chips"><li>Shopify (Liquid)</li><li>Wix</li><li>Yoast</li><li>Rank Math</li><li>All in One SEO</li></ul>
     </div>
+    <aside class="limit reveal">
+      <h3>Not my lane</h3>
+      <p>I don't do GA4, Search Console, schema or paid ads. I haven't run them on a client site, so I won't bill you for them.</p>
+    </aside>
   </div>
 </section>
 
-<section id="experience">
-  <div class="sec">
-    <h2>Experience</h2>
-    <div class="body">
-      <div class="job">
+<section class="exp" id="experience">
+  <div class="wrap">
+    <div class="sec-head reveal"><h2>Experience</h2></div>
+    <div class="tl">
+      <div class="job reveal">
         <div class="when">Aug 2026 to now</div>
-        <div>
-          <h3>Independent WordPress developer</h3>
-          <div class="where">Self-employed, remote</div>
-          <p>Speed audits, migrations and WooCommerce repairs.</p>
-        </div>
+        <h3>Independent WordPress developer</h3>
+        <div class="where">Self-employed, remote</div>
+        <p>Speed audits, migrations and WooCommerce repairs.</p>
       </div>
-      <div class="job">
+      <div class="job reveal">
         <div class="when">May 2024 to Aug 2025</div>
-        <div>
-          <h3>WordPress developer</h3>
-          <div class="where">Digital Clics Marketing, remote</div>
-          <p>Built and maintained client sites on WordPress, Shopify and Wix. On optimization jobs, moved PageSpeed and GTmetrix scores from the 40s and 50s to 70-80+ on desktop and mobile. Handled servers, DNS, SSL and migrations.</p>
-        </div>
+        <h3>WordPress developer</h3>
+        <div class="where">Digital Clics Marketing, remote</div>
+        <p>Built and maintained client sites on WordPress, Shopify and Wix. On optimization jobs, moved PageSpeed and GTmetrix scores from the 40s and 50s to 70-80+ on desktop and mobile. Handled servers, DNS, SSL and migrations.</p>
       </div>
-      <div class="job">
+      <div class="job reveal">
         <div class="when">Jun 2023 to Jul 2024</div>
-        <div>
-          <h3>Technical project lead and e-commerce specialist</h3>
-          <div class="where">Meer Technologies</div>
-          <p>Ran the Hostlint redesign to launch-ready on my own, rebuilding it as a custom PHP theme when WordPress was too heavy for its host. It didn't launch. Built the Amazon, eBay and Walmart operation from zero to $35,000+ in profit.</p>
-        </div>
+        <h3>Technical project lead and e-commerce specialist</h3>
+        <div class="where">Meer Technologies</div>
+        <p>Ran the Hostlint redesign to launch-ready on my own, rebuilding it as a custom PHP theme when WordPress was too heavy for its host. It didn't launch. Built the Amazon, eBay and Walmart operation from zero to $35,000+ in profit.</p>
       </div>
-      <div class="job">
+      <div class="job reveal">
         <div class="when">Dec 2022 to Jun 2023</div>
-        <div>
-          <h3>Web developer, intern</h3>
-          <div class="where">Kawish IT Services</div>
-          <p>WordPress and Shopify builds. Sourced and delivered two client projects independently through Upwork.</p>
-        </div>
+        <h3>Web developer, intern</h3>
+        <div class="where">Kawish IT Services</div>
+        <p>WordPress and Shopify builds. Sourced and delivered two client projects independently through Upwork.</p>
       </div>
-      <div class="creds">
-        <h3>Education</h3>
-        <p>BS Computer Science, Abbottabad University of Science &amp; Technology, 2018 to 2022.</p>
-        <p><a href="https://coursera.org/verify/868SKTJQGQQ4" target="_blank" rel="noopener">Foundations of Digital Marketing and E-commerce</a> (Google, on Coursera).</p>
-      </div>
+    </div>
+    <div class="creds reveal">
+      <h3>Education</h3>
+      <p>BS Computer Science, Abbottabad University of Science &amp; Technology, 2018 to 2022.</p>
+      <p><a href="https://coursera.org/verify/868SKTJQGQQ4" target="_blank" rel="noopener">Foundations of Digital Marketing and E-commerce</a> (Google, on Coursera).</p>
     </div>
   </div>
 </section>
 
-<section id="contact">
-  <div class="sec">
-    <h2>Send me the URL and what's wrong</h2>
-    <div class="body">
-      <p class="lead dim">Useful to include: your hosting provider, whether you have admin access, and the error you're seeing. No call needed unless you want one.</p>
-      <form action="https://formsubmit.co/amnajadoon07@gmail.com" method="POST">
-        <input type="hidden" name="_subject" value="New portfolio enquiry">
-        <input type="hidden" name="_next" value="https://amnajadoon-dev.github.io/thanks.html">
-        <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <label for="u">Site URL</label>
-        <input class="field" id="u" name="url" inputmode="url" placeholder="yoursite.com">
-        <label for="n">Your name</label>
-        <input class="field" id="n" name="name" autocomplete="name" required>
-        <label for="e">Email</label>
-        <input class="field" id="e" type="email" name="email" autocomplete="email" required>
-        <label for="s">What you need</label>
-        <select class="field" id="s" name="service">
-          <option>Speed optimization</option>
-          <option>Migration or hosting move</option>
-          <option>WooCommerce fix</option>
-          <option>New build or redesign</option>
-          <option>Something else</option>
-        </select>
-        <label for="m">What's wrong</label>
-        <textarea class="field" id="m" name="message" rows="4" required placeholder="Homepage takes 8 seconds. Checkout fails on mobile. GTmetrix says 47."></textarea>
-        <button class="btn" type="submit">Send it</button>
-      </form>
+<section class="contact" id="contact">
+  <div class="wrap contact-grid">
+    <div class="reveal">
+      <h2>Send me the URL and what's wrong</h2>
+      <p class="lead">Useful to include: your hosting provider, whether you have admin access, and the error you're seeing.</p>
       <div class="contact-lines">
-        <p>Or email <a href="mailto:amnajadoon07@gmail.com">amnajadoon07@gmail.com</a></p>
+        <p>Email: <a href="mailto:amnajadoon07@gmail.com">amnajadoon07@gmail.com</a></p>
         <p>LinkedIn: <a href="https://www.linkedin.com/in/amnajadoon/" target="_blank" rel="noopener">linkedin.com/in/amnajadoon</a></p>
       </div>
     </div>
+    <form class="form-card reveal" action="https://formsubmit.co/amnajadoon07@gmail.com" method="POST">
+      <input type="hidden" name="_subject" value="New portfolio enquiry">
+      <input type="hidden" name="_next" value="https://amnajadoon-dev.github.io/thanks.html">
+      <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <label for="u">Site URL</label>
+      <input class="field" id="u" name="url" inputmode="url" placeholder="yoursite.com">
+      <label for="n">Your name</label>
+      <input class="field" id="n" name="name" autocomplete="name" required>
+      <label for="e">Email</label>
+      <input class="field" id="e" type="email" name="email" autocomplete="email" required>
+      <label for="s">What you need</label>
+      <select class="field" id="s" name="service">
+        <option>Speed optimization</option>
+        <option>Migration or hosting move</option>
+        <option>WooCommerce fix</option>
+        <option>New build or redesign</option>
+        <option>Something else</option>
+      </select>
+      <label for="m">What's wrong</label>
+      <textarea class="field" id="m" name="message" rows="4" required placeholder="Homepage takes 8 seconds. Checkout fails on mobile. GTmetrix says 47."></textarea>
+      <button class="btn" type="submit">Send it</button>
+    </form>
   </div>
 </section>
 
@@ -336,6 +488,16 @@ document.getElementById('start').addEventListener('submit',function(e){
   document.getElementById('contact').scrollIntoView();
   document.getElementById('n').focus({preventScroll:true});
 });
+
+var els=document.querySelectorAll('.reveal');
+if('IntersectionObserver' in window){
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});
+  },{threshold:.08});
+  [].forEach.call(els,function(el){io.observe(el)});
+}else{
+  [].forEach.call(els,function(el){el.classList.add('in')});
+}
 </script>
 </body>
 </html>
