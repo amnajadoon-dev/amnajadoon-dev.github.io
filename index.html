@@ -3,459 +3,592 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Amna Jadoon, WordPress speed and migration developer</title>
-<meta name="description" content="Slow WordPress site? Send Amna Jadoon the URL and get your PageSpeed and GTmetrix numbers, the three things costing you the most, and a fixed price to fix them."/>
+<title>Amna Jadoon, WordPress developer</title>
+<meta name="description" content="Amna Jadoon builds WordPress websites from scratch or from your Figma or PDF design. Mobile optimised, SEO friendly and fast to load. 60+ sites built, fixed or migrated."/>
 <link rel="canonical" href="https://amnajadoon-dev.github.io/"/>
 <link rel="icon" href="favicon.svg" type="image/svg+xml"/>
+<meta name="theme-color" content="#0A0B0D"/>
 <meta property="og:type" content="website"/>
 <meta property="og:url" content="https://amnajadoon-dev.github.io/"/>
-<meta property="og:title" content="Amna Jadoon, WordPress speed and migration developer"/>
-<meta property="og:description" content="Send me your URL. You get your PageSpeed and GTmetrix numbers, the three things costing you the most, and a fixed price to fix them."/>
+<meta property="og:title" content="Amna Jadoon, WordPress developer"/>
+<meta property="og:description" content="I build WordPress websites that are mobile optimised, SEO friendly and fast to load."/>
 <meta property="og:image" content="https://amnajadoon-dev.github.io/og-image.png"/>
 <meta property="og:image:width" content="1200"/>
 <meta property="og:image:height" content="630"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet">
-<script>document.documentElement.className='js'</script>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js')</script>
 <style>
 :root{
-  --bg:#0C1016;
-  --panel:#141A23;
-  --text:#ECE7E1;
-  --dim:rgba(236,231,225,.74);
-  --rule:rgba(236,231,225,.16);
-  --orange:#FF894A;
-  --on-orange:#0C1016;
-  --serif:'Source Serif 4',Georgia,serif;
-  --sans:system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
-  --pad:clamp(20px,5vw,64px);
-  --wide:1240px;
+  --black:#0A0B0D;
+  --panel:#17181C;
+  --white:#F5F4EE;
+  --grey:#BDBEB6;
+  --grey-dark:#45463F;
+  --lime:#C8FF2E;
+  --line:rgba(245,244,238,.18);
+  --line-dark:rgba(10,11,13,.2);
+  --display:'Bebas Neue',Impact,'Arial Narrow',sans-serif;
+  --body:'Source Sans 3',system-ui,sans-serif;
+  --pad:clamp(20px,4vw,56px);
+  --ease:cubic-bezier(.22,1,.36,1);
   color-scheme:dark;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
-::selection{background:var(--orange);color:var(--on-orange)}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{background:var(--black);color:var(--white);font-family:var(--body);font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:clip}
+::selection{background:var(--lime);color:var(--black)}
 a{color:inherit;text-underline-offset:3px}
-img{display:block;max-width:100%;height:auto}
-:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
-h1,h2,h3{font-family:var(--serif);font-weight:700;line-height:1.08;letter-spacing:-.015em}
-h1{font-size:clamp(40px,5.8vw,76px)}
-h2{font-size:clamp(32px,4.2vw,54px)}
-h3{font-size:clamp(21px,2vw,26px);font-weight:600}
-.wrap{max-width:var(--wide);margin:0 auto}
-.dim{color:var(--dim)}
-.js .reveal{transform:translateY(22px);transition:transform .6s cubic-bezier(.2,.8,.2,1)}
-.js .reveal.in{transform:none}
+a,button{touch-action:manipulation}
+img{display:block;width:100%;height:auto}
+:focus-visible{outline:3px solid var(--lime);outline-offset:3px}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:.92;letter-spacing:.005em}
+h2{font-size:clamp(64px,13vw,190px)}
+h3{font-size:clamp(30px,3.2vw,44px);line-height:1}
+.wrap{max-width:1560px;margin:0 auto}
+.skip{position:absolute;left:12px;top:-70px;z-index:60;background:var(--lime);color:var(--black);padding:12px 16px;font-weight:700;transition:top .15s}
+.skip:focus{top:12px}
+.progress{position:fixed;left:0;top:0;z-index:50;width:100%;height:4px;background:var(--lime);transform:scaleX(0);transform-origin:left}
 
-/* top bar */
-.bar{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:12px var(--pad);background:var(--bg);color:var(--text);border-bottom:1px solid var(--rule)}
-.bar-name{font-family:var(--serif);font-weight:700;font-size:20px;text-decoration:none;padding:8px 0}
-.bar nav{display:flex;gap:26px}
-.bar nav a{font-size:15px;text-decoration:none;padding:8px 0}
-.bar nav a:hover{color:var(--orange)}
-#burger{display:none;background:none;border:1px solid var(--text);color:var(--text);font:inherit;font-size:15px;padding:9px 14px;cursor:pointer}
+/* header */
+.bar{position:sticky;top:0;z-index:40;background:var(--black);border-bottom:1px solid var(--line);padding:0 var(--pad)}
+.bar-in{max-width:1560px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px}
+.brand{font-family:var(--display);font-size:26px;letter-spacing:.03em;text-decoration:none;display:inline-flex;align-items:center;min-height:44px}
+.nav{display:flex;align-items:center;gap:26px}
+.nav a{display:inline-flex;align-items:center;min-height:44px;text-decoration:none;font-weight:600;font-size:17px;transition:color .15s}
+.nav a:hover{color:var(--lime)}
+.nav .talk{background:var(--lime);color:var(--black);padding:0 20px;font-weight:700;border-radius:999px;transition:transform .2s var(--ease)}
+.nav .talk:hover{color:var(--black);transform:scale(1.06)}
+#menu{display:none;min-height:44px;padding:0 16px;background:none;color:var(--white);border:1px solid var(--white);border-radius:999px;font:inherit;font-size:16px;font-weight:600;cursor:pointer}
 @media(max-width:759px){
-  #burger{display:block}
-  .bar nav{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;padding:4px var(--pad) 16px;background:var(--bg);border-bottom:1px solid var(--rule)}
-  .bar nav.open{display:flex}
-  .bar nav a{padding:14px 0;border-bottom:1px solid var(--rule);font-size:16px}
+  #menu{display:block}
+  .nav{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;align-items:stretch;gap:0;padding:6px var(--pad) 20px;background:var(--black);border-bottom:1px solid var(--line)}
+  .nav.open{display:flex}
+  .nav a{min-height:52px;font-size:20px;border-bottom:1px solid var(--line)}
+  .nav .talk{justify-content:center;margin-top:14px;border-bottom:0}
 }
 
-section{padding:clamp(60px,8vw,110px) var(--pad);scroll-margin-top:60px}
-.sec-head{max-width:720px;margin-bottom:clamp(32px,4vw,52px)}
-.sec-head p{margin-top:14px;font-size:clamp(17px,1.5vw,19px)}
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:0 30px;border-radius:999px;border:2px solid var(--lime);background:var(--lime);color:var(--black);font:inherit;font-weight:700;text-decoration:none;cursor:pointer;transition:transform .2s var(--ease),background .2s,color .2s}
+.btn:hover{transform:translateY(-3px) scale(1.03)}
+.btn.line{background:transparent;color:var(--white);border-color:var(--white)}
+.btn.line:hover{background:var(--white);color:var(--black)}
+.btn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.btn[disabled]{opacity:.7;cursor:progress;transform:none}
 
 /* hero */
-.hero{background:var(--bg);color:var(--text);overflow:hidden;padding-top:clamp(44px,6vw,84px);padding-bottom:clamp(52px,7vw,96px)}
-.hero-grid{display:grid;gap:44px;align-items:center}
+.hero{position:relative;isolation:isolate;overflow:clip;padding:clamp(32px,5vw,64px) var(--pad) clamp(16px,2vw,28px);min-height:calc(100svh - 65px);display:flex;flex-direction:column;justify-content:space-between}
+.hero canvas{position:absolute;inset:0;z-index:-1;width:100%;height:100%;color:var(--lime);pointer-events:none}
+.hero-grid{position:relative;z-index:2;display:grid;gap:40px;align-items:center;width:100%;max-width:1560px;margin:0 auto}
 .hero-grid>*{min-width:0}
-@media(min-width:980px){.hero-grid{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:64px}}
-.hero h1 em{font-style:normal;color:var(--orange)}
-.hero .offer{margin-top:22px;max-width:50ch;font-size:clamp(18px,1.7vw,21px);color:var(--dim)}
-.url-form{margin-top:30px;max-width:580px}
-.url-form label{margin-top:0}
-.url-row{display:flex;gap:10px}
-.url-row .field{flex:1;min-width:0}
-@media(max-width:519px){.url-row{flex-direction:column}}
-.hero .fact{margin-top:24px;max-width:56ch;font-size:15.5px;color:var(--dim)}
-
-/* hero picture: a real client site with the report card on top */
-.collage{position:relative;padding:0 0 70px}
-.collage .browser{transform:rotate(-1.6deg);max-width:560px}
-.report{position:absolute;right:0;bottom:0;width:min(340px,86%);background:var(--panel);color:var(--text);padding:20px;box-shadow:0 22px 50px rgba(0,0,0,.6);border-top:6px solid var(--orange)}
-.report b{display:block;font-family:var(--serif);font-size:19px;line-height:1.2}
-@media(max-width:979px){
-  .collage{padding:0;max-width:560px}
-  .report{position:relative;width:auto;margin:-18px 0 0 18px}
+@media(min-width:900px){.hero-grid{grid-template-columns:1fr 1fr;gap:56px}}
+.tag{display:inline-block;background:var(--lime);color:var(--black);font-weight:700;font-size:16px;padding:3px 12px;transform:rotate(-2deg)}
+.hero-line{margin-top:18px;font-family:var(--display);font-size:clamp(46px,6.6vw,104px);line-height:.94}
+.hero-line em{font-style:normal;color:var(--lime)}
+.hero-sub{margin-top:18px;max-width:42ch;color:var(--grey);font-size:clamp(18px,1.4vw,21px);background:rgba(10,11,13,.86);box-shadow:0 0 12px 6px rgba(10,11,13,.86)}
+.hero-cta{margin-top:26px;display:flex;flex-wrap:wrap;gap:12px}
+.collage{position:relative;perspective:1200px;max-width:720px;justify-self:end;width:100%}
+.frame{position:relative;background:var(--panel);border-radius:12px;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.65);transform:rotate(-3deg) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .25s ease-out}
+.frame::before{content:"";display:block;height:30px;background:#26282E radial-gradient(circle at 16px 15px,var(--lime) 5px,transparent 6px) no-repeat}
+.stack{position:relative;aspect-ratio:16/10}
+.stack img{position:absolute;inset:0;height:100%;object-fit:cover;object-position:top;opacity:0;transition:opacity .7s}
+.stack img.on{opacity:1}
+.badge{position:absolute;right:-14px;top:-44px;z-index:3;width:clamp(104px,10vw,148px);aspect-ratio:1;border-radius:50%;background:var(--lime);color:var(--black);display:grid;place-items:center;text-decoration:none;transition:transform .25s var(--ease)}
+.badge:hover{transform:scale(1.1)}
+.badge .ring{position:absolute;inset:0;animation:spin 14s linear infinite}
+.badge text{font:700 12.4px var(--body);letter-spacing:.09em;fill:currentColor}
+.badge .mid{width:32%;height:32%;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:899px){.badge{right:0;top:-36px}}
+h1{position:relative;z-index:1;margin:clamp(-46px,-3vw,-12px) auto 0;width:100%;max-width:1560px;font-size:min(21.4vw,44vh,340px);line-height:.86;white-space:nowrap;text-align:center}
+h1 span{display:inline-block;animation:rise .9s var(--ease) both;transition:color .15s,transform .25s var(--ease)}
+h1 span:hover{color:var(--lime);transform:translateY(-3%)}
+@keyframes rise{from{transform:translateY(22%) skewY(5deg)}to{transform:none}}
+@media(max-width:899px){
+  .hero{justify-content:flex-start;gap:26px}
+  h1{order:-1;margin:0 auto}
 }
-.rings{display:flex;flex-wrap:wrap;gap:10px 18px;margin:14px 0}
-.ring{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600}
-.ring svg{width:46px;height:46px;flex:none}
-.ring circle{fill:none;stroke-width:5}
-.ring .track{stroke:var(--rule)}
-.ring .arc{stroke:var(--orange);stroke-linecap:round;stroke-dasharray:113;stroke-dashoffset:113;transform:rotate(-90deg);transform-origin:center;animation:fill 1.8s .4s cubic-bezier(.2,.8,.2,1) forwards}
-.ring:nth-child(2) .arc{animation-delay:.8s}
-.ring text{font:700 17px var(--serif);fill:var(--text);text-anchor:middle;dominant-baseline:central}
-@keyframes fill{to{stroke-dashoffset:28}}
-.report ol{list-style:none;font-size:14.5px;border-top:1px solid var(--rule);padding-top:10px}
-.report li{padding:3px 0}
-.report li.price{font-weight:700}
 
-/* browser frame around every screenshot */
-.browser{background:var(--panel);border-radius:8px;overflow:hidden;box-shadow:0 14px 36px rgba(0,0,0,.55)}
-.browser::before{content:"";display:block;height:24px;background:#232A35 radial-gradient(circle at 14px 12px,var(--orange) 4px,transparent 5px) no-repeat}
-.browser img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top}
-
-/* tool strip */
-.strip{background:var(--orange);color:var(--on-orange);overflow:hidden;padding:13px 0;font-weight:700;font-size:16px}
-.strip-move{display:flex;width:max-content;animation:slide 34s linear infinite}
-.strip ul{display:flex;list-style:none}
-.strip li{padding:0 22px;white-space:nowrap}
-.strip li+li{border-left:2px solid rgba(12,16,22,.3)}
+/* marquee */
+.strip{position:relative;z-index:3;overflow:clip;padding:22px 0}
+.strip-in{background:var(--lime);color:var(--black);transform:rotate(-1.4deg) scale(1.03);padding:10px 0;overflow:hidden}
+.strip-move{display:flex;width:max-content;animation:slide 26s linear infinite}
+.strip:hover .strip-move{animation-play-state:paused}
+.strip ul{display:flex;list-style:none;font-family:var(--display);font-size:clamp(36px,5vw,72px);line-height:1}
+.strip li{padding:0 26px;white-space:nowrap}
+.strip li::after{content:"\2197";margin-left:52px;font-family:var(--body);font-size:.6em;vertical-align:.2em}
 @keyframes slide{to{transform:translateX(-50%)}}
 
-/* numbers */
-.nums{background:var(--bg);padding-top:clamp(44px,5vw,64px);padding-bottom:0}
-.nums-grid{display:grid;gap:20px}
-@media(min-width:760px){.nums-grid{grid-template-columns:repeat(3,1fr)}}
-.num strong{display:block;font-family:var(--serif);font-size:clamp(46px,5.4vw,70px);line-height:1;color:var(--orange)}
-.num span{display:block;margin-top:6px;color:var(--dim)}
+/* statement + numbers */
+.say{padding:clamp(70px,11vw,160px) var(--pad) clamp(40px,6vw,80px)}
+.say p{font-family:var(--display);font-size:clamp(46px,8.4vw,136px);line-height:.98;max-width:15em}
+.say i{font-style:normal}
+.nums{display:grid;gap:24px;margin-top:clamp(44px,6vw,80px);border-top:1px solid var(--line);padding-top:28px}
+@media(min-width:760px){.nums{grid-template-columns:repeat(3,1fr)}}
+.nums strong{display:block;font-family:var(--display);font-weight:400;font-size:clamp(76px,10vw,150px);line-height:.9;color:var(--lime)}
+.nums span{color:var(--grey)}
+
+/* reveal: movement only, so content is never hidden */
+.js .rv{transform:translateY(56px);transition:transform .9s var(--ease)}
+.js .rv.in{transform:none}
 
 /* work */
-.case{display:grid;gap:22px;align-items:center;margin-bottom:clamp(40px,5vw,68px)}
-.case>*{min-width:0}
-@media(min-width:860px){
-  .case{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:52px}
-  .case.flip .browser{order:2}
+.work{padding:clamp(50px,7vw,90px) var(--pad)}
+.work-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:14px 40px;margin-bottom:clamp(30px,5vw,64px)}
+.work-head p{max-width:34ch;color:var(--grey)}
+.gallery{list-style:none;display:grid;gap:clamp(34px,4vw,64px) clamp(20px,3vw,44px)}
+@media(min-width:760px){.gallery{grid-template-columns:1fr 1fr}.gallery li:nth-child(even){margin-top:clamp(50px,8vw,120px)}}
+.card{display:block;text-decoration:none;border-radius:10px}
+.shot{position:relative;overflow:hidden;border-radius:10px;background:var(--panel);aspect-ratio:16/10.5;isolation:isolate}
+.shot img{height:100%;object-fit:cover;object-position:top;transition:transform .8s var(--ease)}
+.veil{position:absolute;inset:auto 0 0 0;z-index:2;background:var(--lime);color:var(--black);font-family:var(--display);font-size:clamp(34px,4.6vw,72px);line-height:1;padding:14px 20px 10px;display:flex;justify-content:space-between;align-items:center;transform:translateY(102%);transition:transform .35s var(--ease)}
+.veil svg{width:.7em;height:.7em;stroke:currentColor;fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.card:hover .shot img,.card:focus-visible .shot img{transform:scale(1.07)}
+.card:hover .veil,.card:focus-visible .veil{transform:none}
+.card-meta{display:grid;grid-template-columns:auto 1fr;gap:0 14px;margin-top:14px;align-items:baseline}
+.card-meta b{font-family:var(--display);font-weight:400;font-size:24px;color:var(--lime);line-height:1}
+.card-meta h3{transition:color .15s}
+.card:hover h3{color:var(--lime)}
+.card-meta p{grid-column:2;margin-top:5px;color:var(--grey)}
+@media(hover:none){.veil{display:none}.card:hover .shot img{transform:none}}
+
+/* services: panels stack as you scroll */
+.services{padding:clamp(50px,7vw,90px) var(--pad)}
+.services h2{margin-bottom:clamp(26px,4vw,50px)}
+.panel{border-radius:16px;padding:clamp(26px,4vw,56px);display:grid;gap:18px 48px;margin-bottom:18px;min-height:clamp(320px,52vh,520px);align-content:space-between}
+.panel>*{min-width:0}
+@media(min-width:760px){
+  .panel{position:sticky;grid-template-columns:1.2fr 1fr}
+  .panel:nth-of-type(1){top:82px}
+  .panel:nth-of-type(2){top:100px}
+  .panel:nth-of-type(3){top:118px}
 }
-.case .browser{transition:transform .25s}
-.case:hover .browser{transform:translateY(-5px)}
-.case p{margin-top:10px;color:var(--dim)}
-.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
-.tags span{background:var(--panel);border:1px solid var(--rule);font-size:13.5px;padding:3px 10px}
-.btn-line{display:inline-block;margin-top:14px;padding:6px 0;font-weight:700;color:var(--orange)}
-h3.others{margin:0 0 20px;font-size:clamp(24px,2.6vw,32px)}
-.gallery{display:grid;gap:26px 22px;grid-template-columns:repeat(auto-fill,minmax(min(100%,270px),1fr))}
-.tile{text-decoration:none;display:block}
-.tile .browser{transition:transform .25s,box-shadow .25s}
-.tile:hover .browser{transform:translateY(-5px);box-shadow:0 20px 42px rgba(0,0,0,.7)}
-.tile b{display:block;margin-top:12px;font-size:17px}
-.tile span{display:block;font-size:15px;color:var(--dim)}
+.panel h3{font-size:clamp(46px,8.6vw,136px);line-height:.92}
+.panel p{font-size:clamp(18px,1.5vw,22px);max-width:40ch}
+.panel small{display:block;margin-top:14px;font-size:16px}
+.p1{background:var(--lime);color:var(--black)}
+.p2{background:var(--white);color:var(--black)}
+.p3{background:var(--panel);border:1px solid var(--line)}
+.p3 small{color:var(--grey)}
 
-/* how it works */
-.how{background:var(--panel)}
-.how .sec-head p{color:var(--dim)}
-.steps{list-style:none;display:grid;gap:0;counter-reset:s}
-.steps>li{position:relative;padding:0 0 30px 62px;counter-increment:s}
-.steps>li::before{content:counter(s);position:absolute;left:0;top:0;width:44px;height:44px;border-radius:50%;background:var(--orange);color:var(--on-orange);font:700 20px/44px var(--serif);text-align:center}
-.steps>li::after{content:"";position:absolute;left:21px;top:44px;bottom:0;width:2px;background:var(--rule)}
-.steps>li:last-child::after{display:none}
-.steps h3{padding-top:7px}
-.steps p{margin-top:7px;color:var(--dim);max-width:44ch}
-@media(min-width:900px){
-  .steps{grid-template-columns:repeat(4,1fr);gap:26px}
-  .steps>li{padding:62px 0 0}
-  .steps>li::after{left:52px;right:-26px;top:21px;bottom:auto;width:auto;height:2px}
+/* steps */
+.steps-sec{padding:clamp(50px,7vw,90px) var(--pad)}
+.steps-sec h2{margin-bottom:clamp(26px,4vw,50px)}
+.steps{list-style:none;display:grid;gap:14px;counter-reset:s}
+@media(min-width:620px){.steps{grid-template-columns:1fr 1fr}}
+@media(min-width:1040px){.steps{grid-template-columns:repeat(4,1fr)}}
+.steps li{position:relative;overflow:hidden;isolation:isolate;counter-increment:s;background:var(--panel);border-radius:14px;padding:24px;min-height:300px;display:flex;flex-direction:column;justify-content:flex-end;transition:color .25s}
+.steps li::before{content:counter(s,decimal-leading-zero);position:absolute;top:14px;left:24px;font-family:var(--display);font-size:92px;line-height:1;color:var(--lime);transition:color .25s}
+.steps li::after{content:"";position:absolute;inset:0;z-index:-1;background:var(--lime);transform:translateY(101%);transition:transform .35s var(--ease)}
+.steps li:hover{color:var(--black)}
+.steps li:hover::before{color:var(--black)}
+.steps li:hover::after{transform:none}
+.steps p{margin-top:8px;color:var(--grey);transition:color .25s}
+.steps li:hover p{color:var(--black)}
+
+/* pricing */
+.pricing{padding:clamp(50px,7vw,90px) var(--pad)}
+.plans{display:grid;gap:14px}
+.plans>*{min-width:0}
+@media(min-width:760px){.plans{grid-template-columns:1fr 1fr}.plan:nth-child(3){grid-column:1/-1}}
+@media(min-width:1100px){.plans{grid-template-columns:repeat(3,1fr)}.plan:nth-child(3){grid-column:auto}}
+.plan{border-radius:16px;padding:clamp(24px,3.2vw,44px);display:flex;flex-direction:column;gap:22px;background:var(--panel)}
+.plan h3{font-size:clamp(38px,4vw,60px);line-height:.92}
+.who{margin-top:8px;color:var(--grey)}
+.amount small{display:block;font-weight:700;font-size:17px}
+.amount strong{display:block;font-family:var(--display);font-weight:400;font-size:clamp(96px,9vw,150px);line-height:.9;color:var(--lime)}
+.amount span{display:block;font-weight:600}
+.plan ul{list-style:none;flex:1}
+.plan li{display:grid;grid-template-columns:26px 1fr;gap:12px;align-items:start;padding:11px 8px;border-top:1px solid var(--line);border-radius:6px;transition:background .2s,color .2s,transform .25s var(--ease)}
+.plan li svg{width:24px;height:24px;margin-top:2px;stroke:var(--lime);fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;transition:stroke .2s}
+.plan .btn{width:100%}
+.plan .btn:hover{background:transparent;color:var(--lime)}
+.hot{background:var(--lime);color:var(--black)}
+.hot :focus-visible{outline-color:var(--black)}
+.hot .who{color:var(--black);font-weight:600}
+.hot .amount strong{color:var(--black)}
+.hot li{border-top-color:var(--line-dark)}
+.hot li svg{stroke:var(--black)}
+.hot .btn{background:var(--black);border-color:var(--black);color:var(--lime)}
+.hot .btn:hover{background:transparent;color:var(--black)}
+.flag{align-self:flex-start;background:var(--black);color:var(--lime);font-weight:700;font-size:16px;padding:3px 12px;transform:rotate(-2deg)}
+@media(hover:hover){
+  .plan li:hover{background:var(--lime);color:var(--black);transform:translateX(6px)}
+  .plan li:hover svg{stroke:var(--black)}
+  .hot li:hover{background:var(--black);color:var(--lime)}
+  .hot li:hover svg{stroke:var(--lime)}
 }
+.extras{display:grid;gap:14px;margin-top:14px}
+.extras>*{min-width:0}
+@media(min-width:900px){.extras{grid-template-columns:1fr 1fr}}
+.extra{border:1px solid var(--line);border-radius:16px;padding:clamp(20px,2.6vw,32px)}
+.extra small{display:inline-block;background:var(--lime);color:var(--black);font-weight:700;font-size:16px;padding:1px 10px;margin-bottom:12px}
+.extra h3{font-size:clamp(32px,3.4vw,48px);line-height:1}
+.extra p{margin-top:8px;color:var(--grey)}
+.fine{margin-top:18px;color:var(--grey);font-size:17px}
 
-/* services */
-.svc-grid{display:grid;gap:20px}
-.svc-grid>*{min-width:0}
-@media(min-width:900px){.svc-grid{grid-template-columns:1.2fr 1fr 1fr}}
-.svc{background:var(--panel);border-top:6px solid var(--orange);padding:26px}
-.svc.hot{background:var(--orange);color:var(--on-orange);border-top-color:var(--on-orange)}
-.svc svg{width:44px;height:44px;margin-bottom:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.svc p{margin-top:10px}
-.svc p.tools{font-size:15px}
-
-/* stack */
-.stack-sec{padding-top:0}
-.stack-grid{display:grid;gap:36px}
-.stack-grid>*{min-width:0}
-@media(min-width:900px){.stack-grid{grid-template-columns:1.4fr 1fr;gap:56px}}
-.stack h3{font-family:var(--sans);font-size:16px;font-weight:700;letter-spacing:0;margin:20px 0 10px}
-.stack h3:first-of-type{margin-top:0}
-.chips{display:flex;flex-wrap:wrap;gap:8px;list-style:none}
-.chips li{background:var(--panel);border:1px solid var(--rule);font-size:15px;padding:5px 12px}
-.limit{background:var(--panel);padding:28px;border-left:8px solid var(--orange);align-self:start}
-.limit p{margin-top:10px;color:var(--dim)}
-
-/* experience */
-.exp{background:var(--panel)}
-.tl{position:relative;max-width:860px}
-.job{position:relative;padding:0 0 32px 34px;border-left:2px solid var(--rule);margin-left:7px}
-.job:last-child{padding-bottom:0}
-.job::before{content:"";position:absolute;left:-9px;top:6px;width:16px;height:16px;border-radius:50%;background:var(--orange);border:2px solid var(--panel)}
-.when{font-size:15px;font-weight:700;color:var(--orange)}
-.where{font-size:15px;font-weight:600;margin-top:5px}
-.job h3{margin-top:3px}
-.job p{margin-top:8px;color:var(--dim);max-width:62ch}
-.creds{margin-top:36px;max-width:860px;padding-top:22px;border-top:1px solid var(--rule)}
-.creds p{margin-top:6px;color:var(--dim)}
-.creds a{display:inline-block}
+/* about */
+.about{background:var(--white);color:var(--black);padding:clamp(60px,9vw,130px) var(--pad);border-radius:28px 28px 0 0}
+.about :focus-visible{outline-color:var(--black)}
+.about-grid{display:grid;gap:44px;margin-top:clamp(28px,4vw,56px)}
+.about-grid>*{min-width:0}
+@media(min-width:900px){.about-grid{grid-template-columns:1.1fr 1fr;gap:80px}}
+.me{max-width:460px;margin-bottom:34px;border-radius:16px;box-shadow:14px 14px 0 var(--lime)}
+.me img{border-radius:16px}
+.lead{font-family:var(--display);font-size:clamp(38px,4.6vw,72px);line-height:1}
+.about-copy p:not(.lead){margin-top:18px;color:var(--grey-dark);font-size:clamp(18px,1.4vw,20px);max-width:52ch}
+.limit{margin-top:26px;background:var(--black);color:var(--white);border-radius:14px;padding:22px 24px}
+.limit h3{color:var(--lime);font-size:34px}
+.limit p{margin-top:6px!important;color:var(--white)!important}
+.sub{font-size:34px;margin-bottom:12px}
+.chips{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin-bottom:34px}
+.chips li{border:1.5px solid var(--black);border-radius:999px;padding:3px 14px;font-weight:600;font-size:16px}
+.jobs{list-style:none}
+.jobs li{padding:15px 0;border-top:1px solid var(--line-dark)}
+.jobs b{display:block;font-weight:700;font-size:19px}
+.jobs span{display:block;font-size:16px;color:var(--grey-dark)}
+.jobs p{margin-top:5px;font-size:17px;color:var(--grey-dark)}
+.edu{margin-top:16px;font-size:17px;color:var(--grey-dark)}
+.edu a{color:var(--black);font-weight:600}
 
 /* contact */
-.contact{background:var(--panel)}
-.contact-grid{display:grid;gap:36px}
+.contact{background:var(--lime);color:var(--black);padding:clamp(60px,9vw,130px) var(--pad)}
+.contact :focus-visible{outline-color:var(--black)}
+.contact-grid{display:grid;gap:40px;align-items:start}
 .contact-grid>*{min-width:0}
-@media(min-width:900px){.contact-grid{grid-template-columns:1fr minmax(0,1.1fr);gap:64px}}
-.contact .lead{margin-top:16px;color:var(--dim);font-size:clamp(17px,1.5vw,19px)}
-.contact-lines{margin-top:26px}
-.contact-lines p{padding:6px 0;overflow-wrap:anywhere}
-.contact-lines a{display:inline-block;padding:4px 0;font-weight:600}
-.form-card{background:var(--bg);padding:clamp(20px,3vw,34px);border-top:6px solid var(--orange)}
-.form-card label:first-of-type{margin-top:0}
-.form-card .btn{margin-top:24px}
+@media(min-width:960px){.contact-grid{grid-template-columns:1.1fr 1fr;gap:64px}}
+.contact h2{font-size:clamp(76px,13vw,210px)}
+.contact-copy>p{margin-top:18px;max-width:40ch;font-size:clamp(19px,1.6vw,23px);font-weight:600}
+.links{list-style:none;margin-top:20px}
+.links li{overflow-wrap:anywhere}
+.links a{display:inline-flex;align-items:center;min-height:44px;font-weight:700;font-size:19px}
+form{background:var(--black);color:var(--white);border-radius:16px;padding:clamp(20px,3vw,36px)}
+form :focus-visible{outline-color:var(--lime)}
+.summary{display:none;margin-bottom:20px;padding:14px 16px;border:2px solid var(--lime);border-radius:10px}
+.summary.show{display:block}
+.summary h3{font-size:26px}
+.summary ul{list-style:none;margin-top:4px}
+.summary a{display:inline-flex;align-items:center;min-height:44px;color:var(--lime)}
+.f{margin-bottom:18px}
+label{display:block;font-weight:600;font-size:17px;margin-bottom:6px}
+label small{font-weight:400;font-size:16px;color:var(--grey)}
+.field{display:block;width:100%;min-height:52px;padding:12px;font:inherit;font-size:17px;color:var(--white);background:var(--panel);border:1px solid rgba(245,244,238,.55);border-radius:10px;transition:border-color .15s}
+.field:hover{border-color:var(--white)}
+.field::placeholder{color:var(--grey)}
+.field[aria-invalid=true]{border:2px solid var(--lime)}
+.err{display:none;margin-top:6px;font-size:16px;color:var(--lime)}
+.err.show{display:block}
+.err.show::before{content:"Error: "}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+form .btn{width:100%}
 
-/* buttons and fields */
-.btn{background:var(--orange);color:var(--on-orange);border:2px solid var(--orange);font:inherit;font-weight:700;padding:12px 24px;min-height:50px;cursor:pointer;transition:background .18s,color .18s}
-.btn:hover{background:transparent;color:inherit}
-label{display:block;font-size:15px;font-weight:600;margin:18px 0 6px}
-.field{display:block;width:100%;background:var(--panel);border:1px solid rgba(236,231,225,.5);border-radius:0;color:var(--text);font:inherit;font-size:16px;padding:12px;min-height:50px}
-.field::placeholder{color:var(--dim)}
-.hp{position:absolute;left:-9999px}
+footer{padding:clamp(30px,4vw,50px) var(--pad) 22px;overflow:clip}
+.foot-name{font-family:var(--display);font-size:min(21.4vw,340px);line-height:.86;text-align:center;white-space:nowrap;color:transparent;-webkit-text-stroke:1.5px var(--grey)}
+.foot{max-width:1560px;margin:18px auto 0;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:4px 20px;color:var(--grey);font-size:16px}
+.foot a{display:inline-flex;align-items:center;min-height:44px;color:var(--white)}
 
-footer{background:var(--bg);color:var(--dim);border-top:1px solid var(--rule);padding:24px var(--pad);display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between;font-size:15px}
-footer a{display:inline-block;padding:4px 0}
+/* pause + cursor */
+#motion{position:fixed;right:16px;bottom:16px;z-index:45;width:48px;height:48px;border-radius:50%;background:var(--black);color:var(--white);border:1px solid var(--white);display:grid;place-items:center;cursor:pointer}
+#motion:hover{background:var(--white);color:var(--black)}
+#motion svg{width:18px;height:18px;fill:currentColor}
+.blob{position:fixed;left:0;top:0;z-index:55;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;background:#fff;pointer-events:none;mix-blend-mode:difference;opacity:0;transition:width .25s var(--ease),height .25s var(--ease),margin .25s var(--ease),opacity .2s}
+.blob.show{opacity:1}
+.blob.big{width:56px;height:56px;margin:-28px 0 0 -28px}
+@media(hover:none),(pointer:coarse){.blob{display:none}}
 
+.paused .strip-move,.paused .badge .ring,.paused h1 span{animation-play-state:paused}
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .js .reveal{transform:none;transition:none}
-  .strip-move,.ring .arc{animation:none}
-  .ring .arc{stroke-dashoffset:28}
+  #motion,.blob,.progress{display:none}
+  .strip-move,.badge .ring,h1 span{animation:none}
+  .js .rv{transform:none;transition:none}
+  .frame{transition:none;transform:rotate(-3deg)}
+  .stack img,.shot img,.veil,.btn,.badge,.steps li,.steps li::after,.plan li,.plan li svg{transition:none}
+  .plan li:hover{transform:none}
+  .card:hover .shot img,.card:focus-visible .shot img,.btn:hover,.badge:hover,h1 span:hover{transform:none}
 }
 </style>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="progress" id="progress" aria-hidden="true"></div>
 
 <header class="bar">
-  <a class="bar-name" href="#top">Amna Jadoon</a>
-  <button id="burger" aria-controls="site-nav" aria-expanded="false">Menu</button>
-  <nav id="site-nav">
-    <a href="#work">Work</a>
-    <a href="#how">How it works</a>
-    <a href="#services">Services</a>
-    <a href="#experience">Experience</a>
-    <a href="#contact">Contact</a>
-  </nav>
+  <div class="bar-in">
+    <a class="brand" href="#top">AMNA JADOON</a>
+    <button id="menu" aria-controls="nav" aria-expanded="false">Menu</button>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="#work">Work</a>
+      <a href="#services">Services</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#about">About</a>
+      <a class="talk" href="#contact">Let's talk</a>
+    </nav>
+  </div>
 </header>
 
-<main>
+<main id="main">
 
 <section class="hero" id="top">
-  <div class="wrap hero-grid">
+  <canvas id="sonar" aria-hidden="true"></canvas>
+  <div class="hero-grid">
     <div>
-      <h1>Slow WordPress site? <em>Send me the URL.</em></h1>
-      <p class="offer">You get your PageSpeed and GTmetrix numbers, the three things costing you the most, and a fixed price to fix them.</p>
-      <form class="url-form" id="start" action="#contact">
-        <label for="hero-url">Your site</label>
-        <div class="url-row">
-          <input class="field" id="hero-url" inputmode="url" autocomplete="url" placeholder="yoursite.com">
-          <button class="btn" type="submit">Continue</button>
-        </div>
-      </form>
-      <p class="fact">Taking new WordPress work, remote from Abbottabad, Pakistan (UTC+5).</p>
+      <span class="tag">WordPress developer</span>
+      <p class="hero-line">Need a website? <em>Let's build it.</em></p>
+      <p class="hero-sub">I build WordPress websites from scratch, or from your Figma or PDF design. Mobile optimised, SEO friendly and fast to load.</p>
+      <div class="hero-cta">
+        <a class="btn" href="#contact">Start your project <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        <a class="btn line" href="#work">See my work</a>
+      </div>
     </div>
-    <div class="collage" aria-hidden="true">
-      <div class="browser"><img src="img/marysol.jpg" width="800" height="506" alt=""></div>
-      <div class="report">
-        <b>What you get back</b>
-        <div class="rings">
-          <div class="ring"><svg viewBox="0 0 46 46"><circle class="track" cx="23" cy="23" r="18"/><circle class="arc" cx="23" cy="23" r="18"/><text x="23" y="23">?</text></svg>PageSpeed</div>
-          <div class="ring"><svg viewBox="0 0 46 46"><circle class="track" cx="23" cy="23" r="18"/><circle class="arc" cx="23" cy="23" r="18"/><text x="23" y="23">?</text></svg>GTmetrix</div>
+    <div class="collage" id="collage">
+      <a class="badge" href="#contact" aria-label="Taking new WordPress work. Go to the contact form.">
+        <svg class="ring" viewBox="0 0 120 120" aria-hidden="true"><defs><path id="circle" d="M60 60m-46 0a46 46 0 1 1 92 0a46 46 0 1 1-92 0"/></defs><text><textPath href="#circle">TAKING NEW WORDPRESS WORK &bull; LET'S TALK &bull;</textPath></text></svg>
+        <svg class="mid" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+      </a>
+      <div class="frame" aria-hidden="true">
+        <div class="stack" id="stack">
+          <img class="on" src="img/marysol.jpg" width="800" height="506" alt="">
+          <img src="img/avia.jpg" width="800" height="506" alt="">
+          <img src="img/otra.jpg" width="800" height="506" alt="">
+          <img src="img/koba.jpg" width="800" height="506" alt="">
         </div>
-        <ol>
-          <li>The three things costing you the most</li>
-          <li class="price">A fixed price to fix them</li>
-        </ol>
       </div>
     </div>
   </div>
+  <h1 id="name" aria-label="Amna Jadoon">AMNA JADOON</h1>
 </section>
 
 <div class="strip" aria-hidden="true">
-  <div class="strip-move">
-    <ul><li>WordPress</li><li>WooCommerce</li><li>Elementor Pro</li><li>Divi</li><li>LiteSpeed Cache</li><li>Cloudflare</li><li>cPanel</li><li>Plesk</li><li>Duplicator</li><li>UpdraftPlus</li></ul>
-    <ul><li>WordPress</li><li>WooCommerce</li><li>Elementor Pro</li><li>Divi</li><li>LiteSpeed Cache</li><li>Cloudflare</li><li>cPanel</li><li>Plesk</li><li>Duplicator</li><li>UpdraftPlus</li></ul>
+  <div class="strip-in">
+    <div class="strip-move">
+      <ul><li>WordPress websites</li><li>WooCommerce stores</li><li>Figma to Elementor</li><li>Domain and hosting</li><li>Zero data loss migration</li><li>Basic SEO</li><li>Speed fixes</li></ul>
+      <ul><li>WordPress websites</li><li>WooCommerce stores</li><li>Figma to Elementor</li><li>Domain and hosting</li><li>Zero data loss migration</li><li>Basic SEO</li><li>Speed fixes</li></ul>
+      <ul><li>WordPress websites</li><li>WooCommerce stores</li><li>Figma to Elementor</li><li>Domain and hosting</li><li>Zero data loss migration</li><li>Basic SEO</li><li>Speed fixes</li></ul>
+      <ul><li>WordPress websites</li><li>WooCommerce stores</li><li>Figma to Elementor</li><li>Domain and hosting</li><li>Zero data loss migration</li><li>Basic SEO</li><li>Speed fixes</li></ul>
+    </div>
   </div>
 </div>
 
-<section class="nums">
-  <div class="wrap nums-grid">
-    <div class="num reveal"><strong>60+</strong><span>sites built, fixed or migrated</span></div>
-    <div class="num reveal"><strong>2022</strong><span>the year I started working on WordPress sites</span></div>
-    <div class="num reveal"><strong>15 months</strong><span>at Digital Clics, a US agency</span></div>
-  </div>
-</section>
-
-<section id="work">
+<section class="say">
   <div class="wrap">
-    <div class="sec-head reveal">
-      <h2>Real sites you can click.</h2>
-      <p class="dim">These were team projects at Digital Clics Marketing. Here's the part that was mine.</p>
-    </div>
-
-    <article class="case reveal">
-      <a class="browser" href="https://marysolflowerdesigns.com" target="_blank" rel="noopener"><img src="img/marysol.jpg" width="800" height="506" decoding="async" alt="Marysol Flower Designs homepage"></a>
-      <div>
-        <h3>Marysol Flower Designs</h3>
-        <p>Set up the catalog and checkout for a florist: arrangement size and style options, delivery-date selection, and a mobile-first checkout.</p>
-        <div class="tags"><span>WooCommerce</span><span>Florist</span></div>
-        <a class="btn-line" href="https://marysolflowerdesigns.com" target="_blank" rel="noopener">Visit the site</a>
-      </div>
-    </article>
-
-    <article class="case flip reveal">
-      <a class="browser" href="https://kobaconstructionllc.com" target="_blank" rel="noopener"><img src="img/koba.jpg" width="800" height="506" decoding="async" alt="Koba Construction homepage"></a>
-      <div>
-        <h3>Koba Construction</h3>
-        <p>Built a project showcase with image galleries and lead-capture forms for B2B buyers checking past work.</p>
-        <div class="tags"><span>WordPress</span><span>Construction</span></div>
-        <a class="btn-line" href="https://kobaconstructionllc.com" target="_blank" rel="noopener">Visit the site</a>
-      </div>
-    </article>
-
-    <h3 class="others reveal">Other WordPress sites from the same team</h3>
-    <div class="gallery">
-      <a class="tile reveal" href="https://aviaperformance.com.au" target="_blank" rel="noopener"><div class="browser"><img src="img/avia.jpg" width="800" height="506" decoding="async" alt="Avia Performance homepage"></div><b>Avia Performance</b><span>Fitness and coaching, Australia</span></a>
-      <a class="tile reveal" href="https://otrapizzeriaphx.com" target="_blank" rel="noopener"><div class="browser"><img src="img/otra.jpg" width="800" height="506" decoding="async" alt="Otra Pizzeria homepage"></div><b>Otra Pizzeria PHX</b><span>Restaurant, online menu</span></a>
-      <a class="tile reveal" href="https://nancyisrealestate.com" target="_blank" rel="noopener"><div class="browser"><img src="img/nancy.jpg" width="800" height="506" decoding="async" alt="Nancy Is Real Estate homepage"></div><b>Nancy Is Real Estate</b><span>Real estate, lead generation</span></a>
-      <a class="tile reveal" href="https://cmgeneralcontractingllc.com" target="_blank" rel="noopener"><div class="browser"><img src="img/cm-general.jpg" width="800" height="496" decoding="async" alt="CM General Contracting homepage"></div><b>CM General Contracting</b><span>Roofing and contracting</span></a>
-      <a class="tile reveal" href="https://911gadgets.com" target="_blank" rel="noopener"><div class="browser"><img src="img/911-gadgets.jpg" width="800" height="506" decoding="async" alt="911 Gadgets homepage"></div><b>911 Gadgets</b><span>Electronics repair</span></a>
-      <a class="tile reveal" href="https://quikslips.com" target="_blank" rel="noopener"><div class="browser"><img src="img/quikslips.jpg" width="800" height="506" decoding="async" alt="QuikSlips homepage"></div><b>QuikSlips</b><span>POS platform</span></a>
+    <p id="say">I build WordPress websites that work on every phone, are set up to show on Google, and load fast.</p>
+    <div class="nums">
+      <div class="rv"><strong data-count="60" data-suffix="+">60+</strong><span>sites built, fixed or migrated</span></div>
+      <div class="rv"><strong data-count="4">4</strong><span>page builders: Elementor, Divi, Gutenberg and WPBakery</span></div>
+      <div class="rv"><strong data-count="8">8</strong><span>live WordPress sites to click below</span></div>
     </div>
   </div>
 </section>
 
-<section class="how" id="how">
+<section class="work" id="work">
   <div class="wrap">
-    <div class="sec-head reveal">
-      <h2>How it works</h2>
-      <p>No call needed unless you want one.</p>
+    <div class="work-head">
+      <h2>Work</h2>
+      <p>Team projects from my time at Digital Clics Marketing. Each one opens the live site in a new tab.</p>
     </div>
+    <ul class="gallery" id="gallery">
+      <li class="rv"><a class="card" href="https://marysolflowerdesigns.com" target="_blank" rel="noopener"><div class="shot"><img src="img/marysol.jpg" width="800" height="506" decoding="async" alt="Marysol Flower Designs homepage"><span class="veil" aria-hidden="true">Visit site <svg viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div><div class="card-meta"><b aria-hidden="true">01</b><h3>Marysol Flower Designs</h3><p>WooCommerce catalog and mobile-first checkout with delivery dates</p></div></a></li>
+      <li class="rv"><a class="card" href="https://kobaconstructionllc.com" target="_blank" rel="noopener"><div class="shot"><img src="img/koba.jpg" width="800" height="506" decoding="async" alt="Koba Construction homepage"><span class="veil" aria-hidden="true">Visit site <svg viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div><div class="card-meta"><b aria-hidden="true">02</b><h3>Koba Construction</h3><p>Project galleries and lead-capture forms</p></div></a></li>
+      <li class="rv"><a class="card" href="https://aviaperformance.com.au" target="_blank" rel="noopener"><div class="shot"><img src="img/avia.jpg" width="800" height="506" decoding="async" alt="Avia Performance homepage"><span class="veil" aria-hidden="true">Visit site <svg viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div><div class="card-meta"><b aria-hidden="true">03</b><h3>Avia Performance</h3><p>Fitness and coaching, Australia</p></div></a></li>
+      <li class="rv"><a class="card" href="https://otrapizzeriaphx.com" target="_blank" rel="noopener"><div class="shot"><img src="img/otra.jpg" width="800" height="506" decoding="async" alt="Otra Pizzeria homepage"><span class="veil" aria-hidden="true">Visit site <svg viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div><div class="card-meta"><b aria-hidden="true">04</b><h3>Otra Pizzeria PHX</h3><p>Restaurant with an online menu</p></div></a></li>
+      <li class="rv"><a class="card" href="https://nancyisrealestate.com" target="_blank" rel="noopener"><div class="shot"><img src="img/nancy.jpg" width="800" height="506" decoding="async" alt="Nancy Is Real Estate homepage"><span class="veil" aria-hidden="true">Visit site <svg viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div><div class="card-meta"><b aria-hidden="true">05</b><h3>Nancy Is Real Estate</h3><p>Real estate lead generation</p></div></a></li>
+      <li class="rv"><a class="card" href="https://cmgeneralcontractingllc.com" target="_blank" rel="noopener"><div class="shot"><img src="img/cm-general.jpg" width="800" height="496" decoding="async" alt="CM General Contracting homepage"><span class="veil" aria-hidden="true">Visit site <svg viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div><div class="card-meta"><b aria-hidden="true">06</b><h3>CM General Contracting</h3><p>Roofing and contracting</p></div></a></li>
+      <li class="rv"><a class="card" href="https://911gadgets.com" target="_blank" rel="noopener"><div class="shot"><img src="img/911-gadgets.jpg" width="800" height="506" decoding="async" alt="911 Gadgets homepage"><span class="veil" aria-hidden="true">Visit site <svg viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div><div class="card-meta"><b aria-hidden="true">07</b><h3>911 Gadgets</h3><p>Electronics repair</p></div></a></li>
+      <li class="rv"><a class="card" href="https://quikslips.com" target="_blank" rel="noopener"><div class="shot"><img src="img/quikslips.jpg" width="800" height="506" decoding="async" alt="QuikSlips homepage"><span class="veil" aria-hidden="true">Visit site <svg viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div><div class="card-meta"><b aria-hidden="true">08</b><h3>QuikSlips</h3><p>POS platform</p></div></a></li>
+    </ul>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="wrap">
+    <h2>What I do</h2>
+    <article class="panel p1">
+      <h3>Websites</h3>
+      <div><p>Built from scratch, or from your Figma or PDF design, in Elementor, Divi, Gutenberg or WPBakery. Every site is mobile optimised. WooCommerce stores are my strong point.</p><small>I also take on Shopify (Liquid), Wix (Velo) and Squarespace projects.</small></div>
+    </article>
+    <article class="panel p2">
+      <h3>Hosting and migration</h3>
+      <div><p>Domain and hosting setup, plus website backup and migration from any host or domain to another, with zero data loss.</p><small>A full backup and a staging clone exist before anything moves. Then I check permalinks, forms and email.</small></div>
+    </article>
+    <article class="panel p3">
+      <h3>SEO and speed</h3>
+      <div><p>Basic SEO setup, including meta tags, so your site is ready to be listed on Google. Speed fixes so it loads fast.</p><small>On optimization jobs, I've moved PageSpeed and GTmetrix scores from the 40s and 50s to 70-80+.</small></div>
+    </article>
+  </div>
+</section>
+
+<section class="steps-sec">
+  <div class="wrap">
+    <h2>How it works</h2>
     <ol class="steps">
-      <li class="reveal"><h3>Send me the URL</h3><p>Tell me what's wrong, your hosting provider, and whether you have admin access.</p></li>
-      <li class="reveal"><h3>Get your numbers</h3><p>PageSpeed and GTmetrix scores, the three things costing you the most, and a fixed price.</p></li>
-      <li class="reveal"><h3>Backup first</h3><p>A full backup exists before I touch anything, so a bad change can be undone.</p></li>
-      <li class="reveal"><h3>Before and after</h3><p>You get the before and after scores at handover.</p></li>
+      <li class="rv"><h3>Send your idea</h3><p>Share your idea, your Figma or PDF design, or your current site.</p></li>
+      <li class="rv"><h3>Get a fixed price</h3><p>You get a clear scope and a fixed price before any work starts.</p></li>
+      <li class="rv"><h3>I build it</h3><p>Your site is built in the page builder you want, and made to work on every phone.</p></li>
+      <li class="rv"><h3>We go live</h3><p>Domain, hosting, basic SEO and a speed check are sorted before launch.</p></li>
     </ol>
   </div>
 </section>
 
-<section id="services">
+<section class="pricing" id="pricing">
   <div class="wrap">
-    <div class="sec-head reveal"><h2>What I take on</h2></div>
-    <div class="svc-grid">
-      <div class="svc hot reveal">
-        <svg viewBox="0 0 44 44" aria-hidden="true"><path d="M6 32a18 18 0 1 1 32 0"/><path d="M22 26l9-11"/><circle cx="22" cy="27" r="2.5"/></svg>
-        <h3>Speed</h3>
-        <p>I start with a PageSpeed and GTmetrix baseline, work out whether the builder, images or caching is the cause, and hand you the before and after scores.</p>
-        <p class="tools">Usually with LiteSpeed Cache, Cloudflare or SiteGround Speed Optimizer.</p>
+    <div class="work-head">
+      <h2>Pricing</h2>
+      <p>Three clear starting points. Tell me what you need and you get a fixed price before any work starts.</p>
+    </div>
+    <div class="plans">
+      <article class="plan rv">
+        <div>
+          <h3>Starter website</h3>
+          <p class="who">For small business sites, up to 5 pages.</p>
+        </div>
+        <div class="amount">
+          <small>Starting from</small>
+          <strong>$399</strong>
+          <span>One-time price</span>
+        </div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17 19 7"/></svg>WordPress website built from scratch, or from your Figma or PDF design</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17 19 7"/></svg>Your choice of Elementor, Divi, Gutenberg or WPBakery</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17 19 7"/></svg>Mobile optimised on every page</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17 19 7"/></svg>Domain, hosting and SSL setup</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17 19 7"/></svg>Basic SEO setup with meta tags, ready to be listed on Google</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17 19 7"/></svg>Basic speed optimisation</li>
+        </ul>
+        <a class="btn" href="#contact">Get your fixed price <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+      </article>
+
+      <article class="plan hot rv">
+        <span class="flag">My strong point</span>
+        <div>
+          <h3>WooCommerce and bigger sites</h3>
+          <p class="who">For online stores, and websites over 5 pages.</p>
+        </div>
+        <div class="amount">
+          <small>Starting from</small>
+          <strong>$799</strong>
+          <span>One-time price</span>
+        </div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17 19 7"/></svg>Full website build or WooCommerce store</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17 19 7"/></svg>Product catalog, cart, checkout and payment gateway setup</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17 19 7"/></svg>Mobile optimised on every page</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17 19 7"/></svg>Domain and hosting setup</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17 19 7"/></svg>Basic SEO setup</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17 19 7"/></svg>Basic speed optimisation</li>
+        </ul>
+        <a class="btn" href="#contact">Get your fixed price <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+      </article>
+
+      <article class="plan rv">
+        <div>
+          <h3>Backup and migration</h3>
+          <p class="who">For moving an existing site to a new host or domain.</p>
+        </div>
+        <div class="amount">
+          <small>Starting from</small>
+          <strong>$129</strong>
+          <span>One-time price</span>
+        </div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17 19 7"/></svg>Full website backup</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17 19 7"/></svg>Migration from any host or domain to another</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17 19 7"/></svg>Zero data loss</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17 19 7"/></svg>Staging clone before anything moves</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17 19 7"/></svg>Permalinks, forms and email checked after the move</li>
+        </ul>
+        <a class="btn" href="#contact">Get your fixed price <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+      </article>
+    </div>
+
+    <div class="extras">
+      <div class="extra rv">
+        <small>Extra charge, from $99</small>
+        <h3>Aggressive speed optimisation</h3>
+        <p>Want more than basic speed work? Deeper optimisation can be added to a website plan, priced for your site.</p>
       </div>
-      <div class="svc reveal">
-        <svg viewBox="0 0 44 44" aria-hidden="true"><rect x="4" y="7" width="15" height="30" rx="2"/><rect x="25" y="7" width="15" height="30" rx="2"/><path d="M8 14h7M29 14h7M15 24h14M25 20l4 4-4 4"/></svg>
-        <h3>Migrations and hosting</h3>
-        <p>Host to host, domain to domain, staging to live. A full backup and a staging clone exist before anything moves, so a bad cutover can be undone.</p>
-        <p class="tools">Afterwards I check permalinks, forms and email. I also set up DNS, SSL and professional email, on cPanel, WHM or Plesk.</p>
-      </div>
-      <div class="svc reveal">
-        <svg viewBox="0 0 44 44" aria-hidden="true"><path d="M5 7h5l5 22h19l4-15H12"/><circle cx="18" cy="36" r="2.5"/><circle cx="32" cy="36" r="2.5"/></svg>
-        <h3>WooCommerce repairs and builds</h3>
-        <p>Checkout errors, cart bugs, payment gateways failing on mobile, a theme fighting a plugin. I also build stores from nothing, with custom PHP and jQuery where a plugin would be overkill.</p>
+      <div class="extra rv">
+        <small>Quoted per project</small>
+        <h3>Shopify, Wix and Squarespace</h3>
+        <p>WordPress is my main platform. I also take on Shopify (Liquid), Wix (Velo) and Squarespace projects.</p>
       </div>
     </div>
+
+    <p class="fine">Domain and hosting fees are paid separately.</p>
   </div>
 </section>
 
-<section class="stack-sec" id="stack">
-  <div class="wrap stack-grid">
-    <div class="stack reveal">
-      <h2 style="margin-bottom:24px">Stack</h2>
-      <h3>Daily</h3>
-      <ul class="chips"><li>WordPress</li><li>WooCommerce</li><li>Elementor Pro</li><li>Divi</li><li>WPBakery</li><li>PHP</li><li>jQuery</li><li>HTML</li><li>CSS</li><li>Bootstrap</li></ul>
-      <h3>Speed and servers</h3>
-      <ul class="chips"><li>LiteSpeed Cache</li><li>Cloudflare</li><li>SiteGround Speed Optimizer</li><li>LCP, CLS, INP</li><li>cPanel</li><li>WHM</li><li>Plesk</li><li>DNS</li><li>SSL</li><li>Backups</li></ul>
-      <h3>Also</h3>
-      <ul class="chips"><li>Shopify (Liquid)</li><li>Wix</li><li>Yoast</li><li>Rank Math</li><li>All in One SEO</li></ul>
-    </div>
-    <aside class="limit reveal">
-      <h3>Not my lane</h3>
-      <p>I don't do GA4, Search Console, schema or paid ads. I haven't run them on a client site, so I won't bill you for them.</p>
-    </aside>
-  </div>
-</section>
-
-<section class="exp" id="experience">
+<section class="about" id="about">
   <div class="wrap">
-    <div class="sec-head reveal"><h2>Experience</h2></div>
-    <div class="tl">
-      <div class="job reveal">
-        <div class="when">Aug 2026 to now</div>
-        <h3>Independent WordPress developer</h3>
-        <div class="where">Self-employed, remote</div>
-        <p>Speed audits, migrations and WooCommerce repairs.</p>
+    <h2>About me</h2>
+    <div class="about-grid">
+      <div class="about-copy">
+        <figure class="me"><img src="img/amna-jadoon.jpg" width="800" height="1095" alt="Portrait of Amna Jadoon"></figure>
+        <p class="lead">60+ sites built, fixed or migrated, including 15 months at Digital Clics, a US agency.</p>
+        <p>Building WordPress websites is my main work. I also handle domains, hosting, SSL, migrations, basic SEO and speed. I went independent in August 2026 and work remotely from Abbottabad, Pakistan (UTC+5), in English and Urdu.</p>
+        <div class="limit">
+          <h3>Not my lane</h3>
+          <p>I don't do GA4, Search Console, schema or paid ads. I haven't run them on a client site, so I won't bill you for them.</p>
+        </div>
       </div>
-      <div class="job reveal">
-        <div class="when">May 2024 to Aug 2025</div>
-        <h3>WordPress developer</h3>
-        <div class="where">Digital Clics Marketing, remote</div>
-        <p>Built and maintained client sites on WordPress, Shopify and Wix. On optimization jobs, moved PageSpeed and GTmetrix scores from the 40s and 50s to 70-80+ on desktop and mobile. Handled servers, DNS, SSL and migrations.</p>
+      <div>
+        <h3 class="sub">What I work with</h3>
+        <ul class="chips">
+          <li>WordPress</li><li>Elementor Pro</li><li>Divi</li><li>Gutenberg</li><li>WPBakery</li><li>Figma to WordPress</li><li>WooCommerce</li><li>PHP</li><li>jQuery</li><li>Yoast</li><li>Rank Math</li><li>LiteSpeed Cache</li><li>Cloudflare</li><li>cPanel</li><li>Plesk</li><li>Shopify (Liquid)</li><li>Wix (Velo)</li><li>Squarespace</li>
+        </ul>
+        <h3 class="sub">Experience</h3>
+        <ul class="jobs">
+          <li><b>Independent WordPress developer</b><span>Self-employed, Aug 2026 to now</span></li>
+          <li><b>WordPress developer</b><span>Digital Clics Marketing, May 2024 to Aug 2025</span></li>
+          <li><b>Technical project lead and e-commerce specialist</b><span>Meer Technologies, Jun 2023 to Jul 2024</span><p>Built the Amazon, eBay and Walmart operation from zero to $35,000+ in profit.</p></li>
+          <li><b>Web developer, intern</b><span>Kawish IT Services, Dec 2022 to Jun 2023</span></li>
+        </ul>
+        <p class="edu">BS Computer Science, Abbottabad University of Science &amp; Technology. <a href="https://coursera.org/verify/868SKTJQGQQ4" target="_blank" rel="noopener">Google digital marketing and e-commerce certificate</a>.</p>
       </div>
-      <div class="job reveal">
-        <div class="when">Jun 2023 to Jul 2024</div>
-        <h3>Technical project lead and e-commerce specialist</h3>
-        <div class="where">Meer Technologies</div>
-        <p>Ran the Hostlint redesign to launch-ready on my own, rebuilding it as a custom PHP theme when WordPress was too heavy for its host. It didn't launch. Built the Amazon, eBay and Walmart operation from zero to $35,000+ in profit.</p>
-      </div>
-      <div class="job reveal">
-        <div class="when">Dec 2022 to Jun 2023</div>
-        <h3>Web developer, intern</h3>
-        <div class="where">Kawish IT Services</div>
-        <p>WordPress and Shopify builds. Sourced and delivered two client projects independently through Upwork.</p>
-      </div>
-    </div>
-    <div class="creds reveal">
-      <h3>Education</h3>
-      <p>BS Computer Science, Abbottabad University of Science &amp; Technology, 2018 to 2022.</p>
-      <p><a href="https://coursera.org/verify/868SKTJQGQQ4" target="_blank" rel="noopener">Foundations of Digital Marketing and E-commerce</a> (Google, on Coursera).</p>
     </div>
   </div>
 </section>
 
 <section class="contact" id="contact">
   <div class="wrap contact-grid">
-    <div class="reveal">
-      <h2>Send me the URL and what's wrong</h2>
-      <p class="lead">Useful to include: your hosting provider, whether you have admin access, and the error you're seeing.</p>
-      <div class="contact-lines">
-        <p>Email: <a href="mailto:amnajadoon07@gmail.com">amnajadoon07@gmail.com</a></p>
-        <p>LinkedIn: <a href="https://www.linkedin.com/in/amnajadoon/" target="_blank" rel="noopener">linkedin.com/in/amnajadoon</a></p>
-      </div>
+    <div class="contact-copy">
+      <h2>Need a website?</h2>
+      <p>Tell me what you need. Send your idea, your Figma or PDF design, or your current site, and you get a fixed price.</p>
+      <ul class="links">
+        <li><a href="mailto:amnajadoon07@gmail.com">amnajadoon07@gmail.com</a></li>
+        <li><a href="https://www.linkedin.com/in/amnajadoon/" target="_blank" rel="noopener">linkedin.com/in/amnajadoon</a></li>
+      </ul>
     </div>
-    <form class="form-card reveal" action="https://formsubmit.co/amnajadoon07@gmail.com" method="POST">
+    <form id="contact-form" action="https://formsubmit.co/amnajadoon07@gmail.com" method="POST">
+      <div class="summary" id="summary" role="alert" tabindex="-1" aria-labelledby="summary-title">
+        <h3 id="summary-title">Please fix these before sending</h3>
+        <ul id="summary-list"></ul>
+      </div>
       <input type="hidden" name="_subject" value="New portfolio enquiry">
       <input type="hidden" name="_next" value="https://amnajadoon-dev.github.io/thanks.html">
-      <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
-      <label for="u">Site URL</label>
-      <input class="field" id="u" name="url" inputmode="url" placeholder="yoursite.com">
-      <label for="n">Your name</label>
-      <input class="field" id="n" name="name" autocomplete="name" required>
-      <label for="e">Email</label>
-      <input class="field" id="e" type="email" name="email" autocomplete="email" required>
-      <label for="s">What you need</label>
-      <select class="field" id="s" name="service">
-        <option>Speed optimization</option>
-        <option>Migration or hosting move</option>
-        <option>WooCommerce fix</option>
-        <option>New build or redesign</option>
-        <option>Something else</option>
-      </select>
-      <label for="m">What's wrong</label>
-      <textarea class="field" id="m" name="message" rows="4" required placeholder="Homepage takes 8 seconds. Checkout fails on mobile. GTmetrix says 47."></textarea>
-      <button class="btn" type="submit">Send it</button>
+      <div class="hp" aria-hidden="true"><label for="hp">Leave empty</label><input id="hp" type="text" name="_honey" tabindex="-1" autocomplete="off"></div>
+      <div class="f">
+        <label for="n">Your name</label>
+        <input class="field" id="n" name="name" autocomplete="name" required aria-describedby="n-err" data-error="Enter your name">
+        <p class="err" id="n-err"></p>
+      </div>
+      <div class="f">
+        <label for="e">Email</label>
+        <input class="field" id="e" type="email" name="email" autocomplete="email" required aria-describedby="e-err" data-error="Enter an email address, like you@company.com">
+        <p class="err" id="e-err"></p>
+      </div>
+      <div class="f">
+        <label for="u">Current site or design link <small>(optional)</small></label>
+        <input class="field" id="u" name="url" inputmode="url" autocomplete="url" placeholder="yoursite.com">
+      </div>
+      <div class="f">
+        <label for="m">What do you need?</label>
+        <textarea class="field" id="m" name="message" rows="4" required aria-describedby="m-err" data-error="Tell me what you need"></textarea>
+        <p class="err" id="m-err"></p>
+      </div>
+      <button class="btn" id="send" type="submit">Send message</button>
     </form>
   </div>
 </section>
@@ -463,35 +596,264 @@ footer a{display:inline-block;padding:4px 0}
 </main>
 
 <footer>
-  <div>Amna Jadoon, WordPress developer, Abbottabad, Pakistan. English and Urdu.</div>
-  <a href="#top">Back to top</a>
+  <div class="foot-name" aria-hidden="true">AMNA JADOON</div>
+  <div class="foot">
+    <span>Amna Jadoon, WordPress developer</span>
+    <a href="#top">Back to top</a>
+  </div>
 </footer>
 
+<button id="motion" type="button" aria-pressed="false" aria-label="Pause animations">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path id="motion-icon" d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>
+</button>
+<div class="blob" id="blob" aria-hidden="true"></div>
+
 <script>
-var nav=document.getElementById('site-nav'),bg=document.getElementById('burger');
-bg.addEventListener('click',function(){
-  bg.setAttribute('aria-expanded',nav.classList.toggle('open'));
-});
-nav.addEventListener('click',function(e){
-  if(e.target.tagName==='A'){nav.classList.remove('open');bg.setAttribute('aria-expanded','false');}
-});
+var reduce=window.matchMedia('(prefers-reduced-motion: reduce)');
+var motion={paused:false,listeners:[]};
 
-document.getElementById('start').addEventListener('submit',function(e){
-  e.preventDefault();
-  document.getElementById('u').value=document.getElementById('hero-url').value.trim();
-  document.getElementById('contact').scrollIntoView();
-  document.getElementById('n').focus({preventScroll:true});
-});
+/* Dot-field hero converted to plain JS from Sonar Grid by NIMA MZ (@n1m4mz) on 21st.dev, MIT License. */
+(function(){
+  var host=document.getElementById('top'),canvas=document.getElementById('sonar'),ctx=canvas.getContext('2d');
+  if(!ctx)return;
+  var SPACING=30,DOT=1.5,BASE=.24,PING_EVERY=1.6,SPEED=340,RING=110,AMP=2.6,MAX_RINGS=6,MAX_DPR=2,TAU=Math.PI*2,AREA=[.1,.1,.9,.9];
+  var width=0,height=0,raf=0,timer=0,visible=true,seeded=false,rings=[],nextPing=performance.now()+PING_EVERY*1000;
+  var color=getComputedStyle(canvas).color;
 
-var els=document.querySelectorAll('.reveal');
-if('IntersectionObserver' in window){
+  function addRing(x,y,born){rings.push({x:x,y:y,born:born});while(rings.length>MAX_RINGS)rings.shift();}
+
+  function draw(now){
+    var lifetime=(Math.hypot(width,height)+RING)/SPEED;
+    rings=rings.filter(function(r){return (now-r.born)/1000<lifetime;});
+    var live=rings.map(function(r){var age=(now-r.born)/1000,radius=age*SPEED;return {x:r.x,y:r.y,radius:radius,reach:radius+RING,fade:1-age/lifetime};});
+    ctx.clearRect(0,0,width,height);
+    ctx.fillStyle=color;
+    var cols=Math.ceil(width/SPACING)+1,rows=Math.ceil(height/SPACING)+1,ox=(width-(cols-1)*SPACING)/2,oy=(height-(rows-1)*SPACING)/2,hot=[];
+    ctx.globalAlpha=BASE;
+    ctx.beginPath();
+    for(var i=0;i<cols;i++){
+      var cx=ox+i*SPACING;
+      for(var j=0;j<rows;j++){
+        var cy=oy+j*SPACING,energy=0;
+        for(var n=0;n<live.length;n++){
+          var r=live[n];
+          if(Math.abs(cx-r.x)>r.reach||Math.abs(cy-r.y)>r.reach)continue;
+          var dist=Math.abs(Math.hypot(cx-r.x,cy-r.y)-r.radius);
+          if(dist>=RING)continue;
+          var t=1-dist/RING,k=t*t*(3-2*t)*r.fade;
+          if(k>energy)energy=k;
+        }
+        if(energy<.01){ctx.moveTo(cx+DOT,cy);ctx.arc(cx,cy,DOT,0,TAU);}
+        else hot.push(cx,cy,energy);
+      }
+    }
+    ctx.fill();
+    for(var h=0;h<hot.length;h+=3){
+      ctx.globalAlpha=BASE+(1-BASE)*hot[h+2];
+      ctx.beginPath();
+      ctx.arc(hot[h],hot[h+1],DOT*(1+AMP*hot[h+2]),0,TAU);
+      ctx.fill();
+    }
+    ctx.globalAlpha=1;
+  }
+
+  function resize(){
+    var rect=host.getBoundingClientRect();
+    width=Math.max(1,Math.round(rect.width));
+    height=Math.max(1,Math.round(rect.height));
+    var dpr=Math.min(window.devicePixelRatio||1,MAX_DPR);
+    canvas.width=Math.round(width*dpr);
+    canvas.height=Math.round(height*dpr);
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    if(!seeded){
+      seeded=true;
+      if(!reduce.matches)addRing(width*.72,height*.34,performance.now()-500);
+    }
+    draw(performance.now());
+  }
+
+  function idle(delay){clearTimeout(timer);timer=setTimeout(function(){tick(performance.now());},Math.max(16,delay));}
+
+  function tick(now){
+    raf=0;
+    if(!visible||document.hidden||motion.paused)return;
+    if(reduce.matches){rings=[];draw(now);return;}
+    if(now>=nextPing){
+      addRing(width*(AREA[0]+Math.random()*(AREA[2]-AREA[0])),height*(AREA[1]+Math.random()*(AREA[3]-AREA[1])),now);
+      nextPing=now+PING_EVERY*1000;
+    }
+    draw(now);
+    if(rings.length>0)raf=requestAnimationFrame(tick);
+    else idle(nextPing-now);
+  }
+
+  function wake(){if(!raf){clearTimeout(timer);raf=requestAnimationFrame(tick);}}
+
+  new ResizeObserver(resize).observe(host);
+  new IntersectionObserver(function(es){visible=es[0].isIntersecting;if(visible)wake();},{threshold:0}).observe(host);
+  host.addEventListener('pointerdown',function(e){
+    if(reduce.matches||motion.paused)return;
+    var rect=host.getBoundingClientRect();
+    addRing(e.clientX-rect.left,e.clientY-rect.top,performance.now());
+    wake();
+  });
+  document.addEventListener('visibilitychange',function(){if(!document.hidden)wake();});
+  reduce.addEventListener('change',wake);
+  motion.listeners.push(function(){if(!motion.paused){nextPing=performance.now()+300;wake();}});
+  resize();
+  wake();
+})();
+
+/* hero name, screenshots and tilt */
+(function(){
+  var name=document.getElementById('name'),text=name.textContent;
+  name.textContent='';
+  text.split('').forEach(function(c,i){
+    var s=document.createElement('span');
+    s.setAttribute('aria-hidden','true');
+    s.style.animationDelay=(i*.045)+'s';
+    s.innerHTML=c===' '?'&nbsp;':c;
+    name.appendChild(s);
+  });
+
+  var imgs=document.querySelectorAll('#stack img'),at=0;
+  if(!reduce.matches)setInterval(function(){
+    if(motion.paused||document.hidden)return;
+    imgs[at].classList.remove('on');
+    at=(at+1)%imgs.length;
+    imgs[at].classList.add('on');
+  },2600);
+
+  var col=document.getElementById('collage'),frame=col.querySelector('.frame');
+  if(window.matchMedia('(hover:hover) and (pointer:fine)').matches&&!reduce.matches){
+    document.getElementById('top').addEventListener('pointermove',function(e){
+      if(motion.paused)return;
+      var r=col.getBoundingClientRect();
+      var x=(e.clientX-r.left-r.width/2)/r.width,y=(e.clientY-r.top-r.height/2)/r.height;
+      frame.style.setProperty('--ry',Math.max(-1,Math.min(1,x))*8+'deg');
+      frame.style.setProperty('--rx',Math.max(-1,Math.min(1,y))*-6+'deg');
+    });
+  }
+})();
+
+/* scroll: progress bar, statement words, reveals, counters */
+(function(){
+  var bar=document.getElementById('progress'),say=document.getElementById('say'),ticking=false;
+  var words=say.textContent.split(' ');
+  say.textContent='';
+  words.forEach(function(w,i){
+    var s=document.createElement('i');
+    s.textContent=w+(i<words.length-1?' ':'');
+    say.appendChild(s);
+  });
+  var spans=[].slice.call(say.children);
+
+  function update(){
+    ticking=false;
+    var d=document.documentElement,max=d.scrollHeight-d.clientHeight;
+    bar.style.transform='scaleX('+(max>0?d.scrollTop/max:0)+')';
+    if(reduce.matches)return;
+    var r=say.getBoundingClientRect(),vh=window.innerHeight;
+    var p=Math.max(0,Math.min(1,(vh*.85-r.top)/(r.height+vh*.35)));
+    var lit=Math.round(p*spans.length);
+    spans.forEach(function(s,i){s.style.opacity=i<lit?1:.28;});
+  }
+  window.addEventListener('scroll',function(){if(!ticking){ticking=true;requestAnimationFrame(update);}},{passive:true});
+  window.addEventListener('resize',update);
+  update();
+
+  var counters=[].slice.call(document.querySelectorAll('[data-count]'));
+  function count(el){
+    if(reduce.matches)return;
+    var end=+el.getAttribute('data-count'),suffix=el.getAttribute('data-suffix')||'',start=performance.now();
+    (function step(now){
+      var t=Math.min(1,(now-start)/1100),e=1-Math.pow(1-t,3);
+      el.textContent=Math.round(end*e)+suffix;
+      if(t<1)requestAnimationFrame(step);else el.textContent=end+suffix;
+    })(start);
+  }
   var io=new IntersectionObserver(function(es){
-    es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});
-  },{threshold:.08});
-  [].forEach.call(els,function(el){io.observe(el)});
-}else{
-  [].forEach.call(els,function(el){el.classList.add('in')});
-}
+    es.forEach(function(en){
+      if(!en.isIntersecting)return;
+      en.target.classList.add('in');
+      var c=en.target.querySelector('[data-count]');
+      if(c)count(c);
+      io.unobserve(en.target);
+    });
+  },{threshold:.12});
+  [].forEach.call(document.querySelectorAll('.rv'),function(el,i){
+    el.style.transitionDelay=(i%4)*.07+'s';
+    io.observe(el);
+  });
+})();
+
+/* cursor blob, menu, pause */
+(function(){
+  var blob=document.getElementById('blob'),x=0,y=0,bx=0,by=0;
+  if(window.matchMedia('(hover:hover) and (pointer:fine)').matches&&!reduce.matches){
+    window.addEventListener('pointermove',function(e){x=e.clientX;y=e.clientY;blob.classList.add('show');blob.classList.toggle('big',!!(e.target.closest&&e.target.closest('.card,.btn,.badge')));},{passive:true});
+    window.addEventListener('scroll',function(){blob.classList.remove('big');},{passive:true});
+    (function loop(){bx+=(x-bx)*.22;by+=(y-by)*.22;blob.style.transform='translate('+bx+'px,'+by+'px)';requestAnimationFrame(loop);})();
+  }
+
+  var nav=document.getElementById('nav'),menu=document.getElementById('menu');
+  menu.addEventListener('click',function(){menu.setAttribute('aria-expanded',nav.classList.toggle('open'));});
+  nav.addEventListener('click',function(e){if(e.target.tagName==='A'){nav.classList.remove('open');menu.setAttribute('aria-expanded','false');}});
+
+  var btn=document.getElementById('motion'),icon=document.getElementById('motion-icon');
+  btn.addEventListener('click',function(){
+    motion.paused=!motion.paused;
+    document.documentElement.classList.toggle('paused',motion.paused);
+    btn.setAttribute('aria-pressed',motion.paused);
+    btn.setAttribute('aria-label',motion.paused?'Play animations':'Pause animations');
+    icon.setAttribute('d',motion.paused?'M8 5v14l11-7z':'M7 5h4v14H7zM13 5h4v14h-4z');
+    motion.listeners.forEach(function(f){f();});
+  });
+})();
+
+/* contact form */
+(function(){
+  var form=document.getElementById('contact-form'),summary=document.getElementById('summary'),list=document.getElementById('summary-list'),send=document.getElementById('send');
+  var fields=[].slice.call(form.querySelectorAll('[data-error]'));
+  form.noValidate=true;
+
+  function check(f){
+    var bad=!f.value.trim()||!f.validity.valid,err=document.getElementById(f.id+'-err');
+    err.textContent=bad?f.getAttribute('data-error'):'';
+    err.classList.toggle('show',bad);
+    if(bad)f.setAttribute('aria-invalid','true');else f.removeAttribute('aria-invalid');
+    return !bad;
+  }
+
+  fields.forEach(function(f){
+    f.addEventListener('blur',function(){if(f.value.trim()||f.hasAttribute('aria-invalid'))check(f);});
+    f.addEventListener('input',function(){if(f.hasAttribute('aria-invalid'))check(f);});
+  });
+
+  form.addEventListener('submit',function(e){
+    var bad=fields.filter(function(f){return !check(f);});
+    list.textContent='';
+    if(bad.length){
+      e.preventDefault();
+      bad.forEach(function(f){
+        var li=document.createElement('li'),a=document.createElement('a');
+        a.href='#'+f.id;
+        a.textContent=f.getAttribute('data-error');
+        a.addEventListener('click',function(ev){ev.preventDefault();f.focus();});
+        li.appendChild(a);
+        list.appendChild(li);
+      });
+      summary.classList.add('show');
+      summary.focus();
+      return;
+    }
+    summary.classList.remove('show');
+    send.disabled=true;
+    send.textContent='Sending...';
+  });
+
+  window.addEventListener('pageshow',function(){send.disabled=false;send.textContent='Send message';});
+})();
 </script>
 </body>
 </html>
