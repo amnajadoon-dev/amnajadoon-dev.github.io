@@ -457,7 +457,7 @@ footer{padding:clamp(30px,4vw,50px) var(--pad) 22px;overflow:clip}
           <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17 19 7"/></svg>Basic SEO setup with meta tags, ready to be listed on Google</li>
           <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17 19 7"/></svg>Basic speed optimisation</li>
         </ul>
-        <a class="btn" href="#contact">Get your fixed price <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        <a class="btn" href="?plan=starter#contact" data-plan="starter">Get your fixed price <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
       </article>
 
       <article class="plan hot rv">
@@ -479,7 +479,7 @@ footer{padding:clamp(30px,4vw,50px) var(--pad) 22px;overflow:clip}
           <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17 19 7"/></svg>Basic SEO setup</li>
           <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17 19 7"/></svg>Basic speed optimisation</li>
         </ul>
-        <a class="btn" href="#contact">Get your fixed price <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        <a class="btn" href="?plan=woocommerce#contact" data-plan="woocommerce">Get your fixed price <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
       </article>
 
       <article class="plan rv">
@@ -499,7 +499,7 @@ footer{padding:clamp(30px,4vw,50px) var(--pad) 22px;overflow:clip}
           <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17 19 7"/></svg>Staging clone before anything moves</li>
           <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17 19 7"/></svg>Permalinks, forms and email checked after the move</li>
         </ul>
-        <a class="btn" href="#contact">Get your fixed price <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        <a class="btn" href="?plan=migration#contact" data-plan="migration">Get your fixed price <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
       </article>
     </div>
 
@@ -566,9 +566,20 @@ footer{padding:clamp(30px,4vw,50px) var(--pad) 22px;overflow:clip}
         <h3 id="summary-title">Please fix these before sending</h3>
         <ul id="summary-list"></ul>
       </div>
-      <input type="hidden" name="_subject" value="New portfolio enquiry">
+      <input type="hidden" id="subject" name="_subject" value="New portfolio enquiry">
       <input type="hidden" name="_next" value="https://amnajadoon-dev.github.io/thanks.html">
       <div class="hp" aria-hidden="true"><label for="hp">Leave empty</label><input id="hp" type="text" name="_honey" tabindex="-1" autocomplete="off"></div>
+      <div class="f">
+        <label for="plan">Plan</label>
+        <select class="field" id="plan" name="plan">
+          <option value="Not sure yet">Not sure yet</option>
+          <option value="Starter website">Starter website, from $399</option>
+          <option value="WooCommerce and bigger sites">WooCommerce and bigger sites, from $799</option>
+          <option value="Backup and migration">Backup and migration, from $129</option>
+          <option value="Aggressive speed optimisation">Aggressive speed optimisation, from $99</option>
+          <option value="Shopify, Wix or Squarespace">Shopify, Wix or Squarespace, quoted per project</option>
+        </select>
+      </div>
       <div class="f">
         <label for="n">Your name</label>
         <input class="field" id="n" name="name" autocomplete="name" required aria-describedby="n-err" data-error="Enter your name">
@@ -815,6 +826,27 @@ var motion={paused:false,listeners:[]};
 (function(){
   var form=document.getElementById('contact-form'),summary=document.getElementById('summary'),list=document.getElementById('summary-list'),send=document.getElementById('send');
   var fields=[].slice.call(form.querySelectorAll('[data-error]'));
+  var plan=document.getElementById('plan'),subject=document.getElementById('subject');
+  var plans={starter:'Starter website',woocommerce:'WooCommerce and bigger sites',migration:'Backup and migration'};
+
+  function setSubject(){
+    subject.value=plan.value==='Not sure yet'?'New portfolio enquiry':'New enquiry: '+plan.value;
+  }
+  plan.addEventListener('change',setSubject);
+
+  var fromLink=plans[new URLSearchParams(location.search).get('plan')];
+  if(fromLink){plan.value=fromLink;setSubject();}
+
+  [].forEach.call(document.querySelectorAll('[data-plan]'),function(a){
+    a.addEventListener('click',function(e){
+      e.preventDefault();
+      plan.value=plans[a.getAttribute('data-plan')];
+      setSubject();
+      history.pushState(null,'',a.getAttribute('href'));
+      document.getElementById('contact').scrollIntoView();
+      document.getElementById('n').focus({preventScroll:true});
+    });
+  });
   form.noValidate=true;
 
   function check(f){
