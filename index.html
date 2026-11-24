@@ -157,11 +157,11 @@ h1 span:hover{color:var(--lime);transform:translateY(-3%)}
 /* client words */
 .words{padding:clamp(50px,7vw,90px) var(--pad)}
 .words h2{margin-bottom:clamp(26px,4vw,50px)}
-.quote{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:clamp(28px,4.4vw,64px)}
-.quote::before{content:"\201C";display:block;font-family:var(--display);font-size:clamp(90px,12vw,170px);line-height:.7;color:var(--lime);margin-bottom:10px}
-.quote p{font-size:clamp(20px,2.1vw,30px);line-height:1.4}
-.quote p+p{margin-top:.7em}
-.quote footer{display:grid;gap:2px;margin-top:clamp(24px,3vw,40px);padding-top:20px;border-top:1px solid var(--line)}
+.quote{background:var(--panel);border:1px solid var(--line);border-left:6px solid var(--lime);border-radius:16px;padding:clamp(28px,4.4vw,64px)}
+.quote p{font-size:clamp(20px,1.9vw,28px);line-height:1.45;text-wrap:pretty}
+.quote p+p{margin-top:.8em}
+.quote .nb{white-space:nowrap}
+.quote footer{display:grid;gap:2px;margin-top:clamp(24px,3vw,40px);padding:20px 0 0;overflow:visible;border-top:1px solid var(--line)}
 .quote footer b{font-size:20px}
 .quote footer span{color:var(--grey)}
 
@@ -422,8 +422,8 @@ footer{padding:clamp(30px,4vw,50px) var(--pad) 22px;overflow:clip}
   <div class="wrap">
     <h2>Client words</h2>
     <blockquote class="quote rv">
-      <p>I had the absolute pleasure of working with Amna Jadoon on the development of our e-commerce platform, Everynest.</p>
-      <p>She delivered a highly responsive, and user-friendly platform that completely aligned with my clients business goals.</p>
+      <p>I had the absolute pleasure of working with Amna Jadoon on the development of our <span class="nb">e-commerce</span> platform, Everynest.</p>
+      <p>She delivered a highly responsive and user-friendly platform that completely aligned with my client's business goals.</p>
       <p>If you are looking for a talented developer who delivers quality work on time, Amna is the absolute best choice.</p>
       <footer><b>Muhammad Naoman Ghafoor</b><span>WordPress Developer | Automation Focused with PHP &amp; Python</span><span>Client, LinkedIn recommendation, November 2026</span></footer>
     </blockquote>
