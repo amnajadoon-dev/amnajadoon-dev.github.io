@@ -154,6 +154,17 @@ h1 span:hover{color:var(--lime);transform:translateY(-3%)}
 .card-meta p{grid-column:2;margin-top:5px;color:var(--grey)}
 @media(hover:none){.veil{display:none}.card:hover .shot img{transform:none}}
 
+/* client words */
+.words{padding:clamp(50px,7vw,90px) var(--pad)}
+.words h2{margin-bottom:clamp(26px,4vw,50px)}
+.quote{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:clamp(28px,4.4vw,64px);max-width:1100px}
+.quote::before{content:"\201C";display:block;font-family:var(--display);font-size:clamp(90px,12vw,170px);line-height:.7;color:var(--lime);margin-bottom:10px}
+.quote p{font-size:clamp(20px,2.1vw,30px);line-height:1.4;max-width:46ch}
+.quote p+p{margin-top:.7em}
+.quote footer{display:grid;gap:2px;margin-top:clamp(24px,3vw,40px);padding-top:20px;border-top:1px solid var(--line)}
+.quote footer b{font-size:20px}
+.quote footer span{color:var(--grey)}
+
 /* services: panels stack as you scroll */
 .services{padding:clamp(50px,7vw,90px) var(--pad)}
 .services h2{margin-bottom:clamp(26px,4vw,50px)}
@@ -403,6 +414,18 @@ footer{padding:clamp(30px,4vw,50px) var(--pad) 22px;overflow:clip}
       <li class="rv"><a class="card" href="https://911gadgets.com" target="_blank" rel="noopener"><div class="shot"><img src="img/911-gadgets.jpg" width="800" height="506" decoding="async" alt="911 Gadgets homepage"><span class="veil" aria-hidden="true">Visit site <svg viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div><div class="card-meta"><b aria-hidden="true">07</b><h3>911 Gadgets</h3><p>Electronics repair</p></div></a></li>
       <li class="rv"><a class="card" href="https://quikslips.com" target="_blank" rel="noopener"><div class="shot"><img src="img/quikslips.jpg" width="800" height="506" decoding="async" alt="QuikSlips homepage"><span class="veil" aria-hidden="true">Visit site <svg viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div><div class="card-meta"><b aria-hidden="true">08</b><h3>QuikSlips</h3><p>POS platform</p></div></a></li>
     </ul>
+  </div>
+</section>
+
+<section class="words" id="words">
+  <div class="wrap">
+    <h2>Client words</h2>
+    <blockquote class="quote rv">
+      <p>I had the absolute pleasure of working with Amna Jadoon on the development of our e-commerce platform, Everynest.</p>
+      <p>She delivered a highly responsive, and user-friendly platform that completely aligned with my clients business goals.</p>
+      <p>If you are looking for a talented developer who delivers quality work on time, Amna is the absolute best choice.</p>
+      <footer><b>Muhammad Naoman Ghafoor</b><span>WordPress Developer | Automation Focused with PHP &amp; Python</span><span>Client, LinkedIn recommendation, November 2026</span></footer>
+    </blockquote>
   </div>
 </section>
 
